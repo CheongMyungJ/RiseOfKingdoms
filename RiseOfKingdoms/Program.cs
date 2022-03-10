@@ -103,3 +103,6 @@ ViewBuff.ViewAdditionalBuff(commander_at, commander_df);
 
 Console.WriteLine("- 반복횟수를 입력해주세요(Max 1000). 1 입력 시 전투로그 확인 가능.");
 SelectInfo.SetRunType(commander_at, commander_df);
+
+Console.WriteLine("아무 키나 눌러 종료하세요.");
+string st = Console.ReadLine();
