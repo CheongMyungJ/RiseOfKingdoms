@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jcm\\Desktop\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj": {}
+    "C:\\Users\\jcm\\Desktop\\git\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jcm\\Desktop\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj": {
+    "C:\\Users\\jcm\\Desktop\\git\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jcm\\Desktop\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj",
+        "projectUniqueName": "C:\\Users\\jcm\\Desktop\\git\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj",
         "projectName": "RiseOfKingdoms",
-        "projectPath": "C:\\Users\\jcm\\Desktop\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj",
+        "projectPath": "C:\\Users\\jcm\\Desktop\\git\\RiseOfKingdoms\\RiseOfKingdoms\\RiseOfKingdoms.csproj",
         "packagesPath": "C:\\Users\\jcm\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jcm\\Desktop\\RiseOfKingdoms\\RiseOfKingdoms\\obj\\",
+        "outputPath": "C:\\Users\\jcm\\Desktop\\git\\RiseOfKingdoms\\RiseOfKingdoms\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jcm\\AppData\\Roaming\\NuGet\\NuGet.Config",
