@@ -37,7 +37,7 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetCommander(CommanderBase commander, bool isFirst)
+        public static void SetCommander(CommanderBase commander, bool isFirst, bool isAttacker)
         {
             while (true)
             {
@@ -55,13 +55,22 @@ namespace RiseOfKingdoms.Common
                     var enumCommander = Enum.Parse(typeof(CommanderList), commanderNum);
                     Console.WriteLine("선택하신 사령관은 {0} 입니다.", Enum.GetName(typeof(CommanderList), int.Parse(commanderNum)));
                     Console.WriteLine();
-                    Commanders.keyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
-                    commander.commanderClassList.Add((Commanders.keyValuePairs[(CommanderList)enumCommander], isFirst));
+
+                    if (isAttacker)
+                    {
+                        Commanders.atkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
+                        commander.commanderClassList.Add((Commanders.atkeyValuePairs[(CommanderList)enumCommander], isFirst));
+                    }
+                    else
+                    {
+                        Commanders.dfkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
+                        commander.commanderClassList.Add((Commanders.dfkeyValuePairs[(CommanderList)enumCommander], isFirst));
+                    }
                     break;
                 }
             }
         }
-        public static void SetTroopType(CommanderBase commander)
+        public static void SetTroopType(CommanderBase commander, bool isAttacker)
         {
             while (true)
             {
@@ -79,7 +88,10 @@ namespace RiseOfKingdoms.Common
                     var enumTier = Enum.Parse(typeof(CommanderList), tier);
                     Console.WriteLine("선택하신 병종은 {0} 입니다.", Enum.GetName(typeof(TierList), int.Parse(tier)));
                     Console.WriteLine();
-                    Tiers.keyValuePairs[(TierList)enumTier].Init(commander);
+                    if (isAttacker)
+                        Tiers.atkeyValuePairs[(TierList)enumTier].Init(commander);
+                    else
+                        Tiers.dfkeyValuePairs[(TierList)enumTier].Init(commander);
                     break;
                 }
             }
@@ -360,7 +372,7 @@ namespace RiseOfKingdoms.Common
             }
         }
 
-        public static void SetSubCharacter(CommanderBase commander)
+        public static void SetSubCharacter(CommanderBase commander, bool isAttacker)
         {
             while (true)
             {
@@ -384,8 +396,16 @@ namespace RiseOfKingdoms.Common
                         int count = int.Parse(numCount[1]);
                         var enumCharacter = Enum.Parse(Character.CharacterSubCharacterPairs[(CharacterList)eNum].GetType(), numCount[0]);
                         Console.Write("{0} {1}단계 ", Enum.GetName(Character.CharacterSubCharacterPairs[(CharacterList)eNum].GetType(), num), count);
-                        Character.keyValuePairs[(Enum)enumCharacter].Init(commander, count);
-                        commander.characterClassList.Add((Character.keyValuePairs[(Enum)enumCharacter], count));
+                        if (isAttacker == true)
+                        {
+                            Character.atkeyValuePairs[(Enum)enumCharacter].Init(commander, count);
+                            commander.characterClassList.Add((Character.atkeyValuePairs[(Enum)enumCharacter], count));
+                        }
+                        else
+                        {
+                            Character.dfkeyValuePairs[(Enum)enumCharacter].Init(commander, count);
+                            commander.characterClassList.Add((Character.dfkeyValuePairs[(Enum)enumCharacter], count));
+                        }
                     }
                     Console.WriteLine("입력하셨습니다.");
                     Console.WriteLine();
@@ -394,7 +414,7 @@ namespace RiseOfKingdoms.Common
             }
         }
 
-        public static void SetEquipment(CommanderBase commander)
+        public static void SetEquipment(CommanderBase commander, bool isAttacker)
         {
             while (true)
             {
@@ -417,8 +437,16 @@ namespace RiseOfKingdoms.Common
                         var enumEquipment = Enum.Parse(typeof(EquipmentList), ch);
                         Console.WriteLine("선택하신 장비는 {0} 입니다.", Enum.GetName(typeof(EquipmentList), num));
                         Console.WriteLine();
-                        Equipment.keyValuePairs[(EquipmentList)enumEquipment].Init(commander, (num % 2 == 0 ? true : false));
-                        commander.equipmentClassList.Add((Equipment.keyValuePairs[(EquipmentList)enumEquipment], (num % 2 == 0 ? true : false)));
+                        if (isAttacker)
+                        {
+                            Equipment.atkeyValuePairs[(EquipmentList)enumEquipment].Init(commander, (num % 2 == 0 ? true : false));
+                            commander.equipmentClassList.Add((Equipment.atkeyValuePairs[(EquipmentList)enumEquipment], (num % 2 == 0 ? true : false)));
+                        }
+                        else
+                        {
+                            Equipment.dfkeyValuePairs[(EquipmentList)enumEquipment].Init(commander, (num % 2 == 0 ? true : false));
+                            commander.equipmentClassList.Add((Equipment.dfkeyValuePairs[(EquipmentList)enumEquipment], (num % 2 == 0 ? true : false)));
+                        }
                     }
                 }
                 break;
@@ -431,9 +459,9 @@ namespace RiseOfKingdoms.Common
             {
                 string numString = Console.ReadLine();
                 int num = 0;
-                if (int.TryParse(numString, out num) == false || (num < 1 || num > 1000))
+                if (int.TryParse(numString, out num) == false || (num < 1 || num > 10000))
                 {
-                    Console.WriteLine("정확한 숫자를 입력해주세요. 최대 1000까지 입력 가능");
+                    Console.WriteLine("정확한 숫자를 입력해주세요. 최대 10000까지 입력 가능");
                 }
                 else
                 {

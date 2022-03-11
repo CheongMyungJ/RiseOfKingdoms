@@ -20,11 +20,11 @@ Console.WriteLine("▶ 공격측 정보 입력.");
 Console.WriteLine("- 필드/집결 여부를 선택하세요.");
 SelectInfo.SetIsField(commander_at);
 Console.WriteLine("- 주사령관 번호를 입력하세요");
-SelectInfo.SetCommander(commander_at, true);
+SelectInfo.SetCommander(commander_at, true, true);
 Console.WriteLine("- 부사령관 번호를 입력하세요");
-SelectInfo.SetCommander(commander_at, false);
+SelectInfo.SetCommander(commander_at, false, true);
 Console.WriteLine("- 병종을 선택해 주세요");
-SelectInfo.SetTroopType(commander_at);
+SelectInfo.SetTroopType(commander_at, true);
 Console.WriteLine("- 부대수를 입력해 주세요");
 SelectInfo.SetTroopAmount(commander_at);
 Console.WriteLine("- 추가 스탯 입력. [부대창설-상세]에 표시되는 부대버프를 입력해주세요.");
@@ -53,20 +53,20 @@ SelectInfo.SetAdditionalSkillDamageDecrease(commander_at);
 Console.WriteLine("- 세 종류의 특성을 선택해주세요. ex) 1,6,11");
 SelectInfo.SetCharacter(commander_at);
 Console.WriteLine("- 각 특성 별 상세특성 정보를 입력해주세요. 단, 일부 특성은 버프에 이미 반영되어 있습니다.");
-SelectInfo.SetSubCharacter(commander_at);
+SelectInfo.SetSubCharacter(commander_at, true);
 Console.WriteLine("- 착용한 악세서리를 두 개 선택해주세요. 단, 일부 악세서리는 버프에 이미 반영되어 있습니다. ex) 1,2");
-SelectInfo.SetEquipment(commander_at);
+SelectInfo.SetEquipment(commander_at, true);
 
 
 Console.WriteLine("▶ 수비측 정보 입력.");
 Console.WriteLine("- 필드/집결 여부를 선택하세요.");
 SelectInfo.SetIsField(commander_df);
 Console.WriteLine("- 주사령관 번호를 입력하세요");
-SelectInfo.SetCommander(commander_df, true);
+SelectInfo.SetCommander(commander_df, true, false);
 Console.WriteLine("- 부사령관 번호를 입력하세요");
-SelectInfo.SetCommander(commander_df, false);
+SelectInfo.SetCommander(commander_df, false, false);
 Console.WriteLine("- 병종을 선택해 주세요");
-SelectInfo.SetTroopType(commander_df);
+SelectInfo.SetTroopType(commander_df, false);
 Console.WriteLine("- 부대수를 입력해 주세요");
 SelectInfo.SetTroopAmount(commander_df);
 Console.WriteLine("- 추가 스탯 입력. [부대창설-상세]에 표시되는 부대버프를 입력해주세요.");
@@ -95,13 +95,13 @@ SelectInfo.SetAdditionalSkillDamageDecrease(commander_df);
 Console.WriteLine("- 세 종류의 특성을 선택해주세요. ex) 1,6,11");
 SelectInfo.SetCharacter(commander_df);
 Console.WriteLine("- 각 특성 별 상세특성 정보를 입력해주세요. 단, 일부 특성은 버프에 이미 반영되어 있습니다.");
-SelectInfo.SetSubCharacter(commander_df);
+SelectInfo.SetSubCharacter(commander_df, false);
 Console.WriteLine("- 착용한 악세서리를 두 개 선택해주세요. 단, 일부 악세서리는 버프에 이미 반영되어 있습니다. ex) 1,2");
-SelectInfo.SetEquipment(commander_df);
+SelectInfo.SetEquipment(commander_df, false);
 
 ViewBuff.ViewAdditionalBuff(commander_at, commander_df);
 
-Console.WriteLine("- 반복횟수를 입력해주세요(Max 1000). 1 입력 시 전투로그 확인 가능.");
+Console.WriteLine("- 반복횟수를 입력해주세요(Max 10000). 1 입력 시 전투로그 확인 가능.");
 SelectInfo.SetRunType(commander_at, commander_df);
 
 Console.WriteLine("아무 키나 눌러 종료하세요.");

@@ -36,7 +36,15 @@ namespace RiseOfKingdoms.Common
                     Console.WriteLine("수비측 남은 부대수 : {0}", df.troop);
                 }
             }
-            if (at.troop <= 0)
+            if (at.troop <= 0 && df.troop <= 0)
+            {
+                if (isRepeat == false)
+                {
+                    Console.WriteLine("무승부!");
+                }
+                return (true, 0);
+            }
+            else if (at.troop <= 0)
             {
                 if (isRepeat == false)
                 {
@@ -121,15 +129,21 @@ namespace RiseOfKingdoms.Common
 
         public static void RepeatRun(CommanderBase at, CommanderBase df, int cnt)
         {
+            double drawCount = 0;
             double atWinCount = 0;
             double dfWinCount = 0;
+            
             double atLeftTroop = 0;
             double dfLeftTroop = 0;
 
             for (int i = 0; i < cnt; i++)
             {
                 var result = Run(at, df, true);
-                if (result.Item1 == true)
+                if (result.Item1 == true && result.Item2 == 0)
+                {
+                    drawCount++;
+                }
+                else if (result.Item1 == true)
                 {
                     atWinCount++;
                     atLeftTroop += result.Item2;
@@ -142,8 +156,9 @@ namespace RiseOfKingdoms.Common
                 at.Reset();
                 df.Reset();
             }
-            Console.WriteLine("공격 승리 확률 : {0}%, 남은 부대수 평균 : {1}", (atWinCount/(atWinCount + dfWinCount)) * 100, Math.Round(atLeftTroop / atWinCount));
-            Console.WriteLine("수비 승리 확률 : {0}, 남은 부대수 평균 : {1}", (dfWinCount / (atWinCount + dfWinCount)) * 100, Math.Round(dfLeftTroop / dfWinCount));
+            Console.WriteLine("무승부 확률 : {0}%", (drawCount / (drawCount  + atWinCount + dfWinCount)) * 100);
+            Console.WriteLine("공격 승리 확률 : {0}%, 남은 부대수 평균 : {1}", (atWinCount/(drawCount + atWinCount + dfWinCount)) * 100, Math.Round(atLeftTroop / atWinCount));
+            Console.WriteLine("수비 승리 확률 : {0}, 남은 부대수 평균 : {1}", (dfWinCount / (drawCount + atWinCount + dfWinCount)) * 100, Math.Round(dfLeftTroop / dfWinCount));
         }
 
     }
