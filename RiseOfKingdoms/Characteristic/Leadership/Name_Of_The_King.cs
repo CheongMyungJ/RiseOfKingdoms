@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,8 @@ namespace RiseOfKingdoms.Characteristic.Leadership
             if (at.battleState == CommanderBase.BattleState.Conquering)
             {
                 actionAmount = (1 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[왕의이름] 부대 공격력 {1}% 증가", at.site, actionAmount);
                 at.tempAttack += actionAmount;
             }
         }

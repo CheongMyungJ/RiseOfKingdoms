@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace RiseOfKingdoms.Characteristic.Cavalry
             if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount <= 0)
             {
                 actionAmount = (5 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[무장해제] 대상 부대 공격력 {1}% 감소. 2초 지속", at.site, actionAmount);
                 actionCount = 2;
             }
             actionCount--;

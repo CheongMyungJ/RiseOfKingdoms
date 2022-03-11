@@ -21,7 +21,7 @@ namespace RiseOfKingdoms.Equip.Epic
             {
                 actionAmount = (isStrengthen ? 13 : 10);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("- {0}[고요한 심판] 대상 부대 분노 {1}% 감소", at.site, actionAmount);
+                    Console.WriteLine("- {0}[고요한 심판] 대상 부대 분노 {1} 감소", at.site, actionAmount);
                 df.rageMinus += actionAmount;
             }
         }

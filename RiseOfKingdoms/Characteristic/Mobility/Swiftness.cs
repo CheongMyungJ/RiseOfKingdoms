@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace RiseOfKingdoms.Characteristic.Mobility
             if (at.skillDamage > 0 && actionCount <= 0)
             {
                 actionAmount = (5 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[가벼운 걸음] 이동속도 {1}% 증가. 5초 지속", at.site, actionAmount);
                 actionCount = 5;
             }
             actionCount--;

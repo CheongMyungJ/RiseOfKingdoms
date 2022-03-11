@@ -117,12 +117,30 @@ namespace RiseOfKingdoms.Common
                 df.ragePlus += 10;
 
             // 공격측 데미지 처리
-            at.troop = at.troop - Math.Round(at.normalAttackDamage) - Math.Round(at.counterAttackDamage) - Math.Round(at.skillDamage) + Math.Round(at.heal);
+            if (at.shield >= at.normalAttackDamage + at.counterAttackDamage + at.skillDamage)
+            {
+                at.shield -= at.normalAttackDamage + at.counterAttackDamage + at.skillDamage;
+                at.troop = at.troop + Math.Round(at.heal);
+            }
+            else
+            {
+                at.troop = at.troop - Math.Round(at.normalAttackDamage) - Math.Round(at.counterAttackDamage) - Math.Round(at.skillDamage) + Math.Round(at.shield) + Math.Round(at.heal);
+                at.shield = 0;
+            }
             // 공격측 분노 처리
             at.rage = at.rage + Math.Min(at.ragePlus, 220) - at.rageMinus;
 
             // 수비측 데미지 처리
-            df.troop = df.troop - Math.Round(df.normalAttackDamage) - Math.Round(df.counterAttackDamage) - Math.Round(df.skillDamage) + Math.Round(df.heal);
+            if (df.shield >= df.normalAttackDamage + df.counterAttackDamage + df.skillDamage)
+            {
+                df.shield -= df.normalAttackDamage + df.counterAttackDamage + df.skillDamage;
+                df.troop = df.troop + Math.Round(df.heal);
+            }
+            else
+            {
+                df.troop = df.troop - Math.Round(df.normalAttackDamage) - Math.Round(df.counterAttackDamage) - Math.Round(df.skillDamage) + Math.Round(df.shield) + Math.Round(df.heal);
+                df.shield = 0;
+            }
             // 수비측 분노 처리
             df.rage = df.rage + Math.Min(df.ragePlus, 220) - df.rageMinus;
 

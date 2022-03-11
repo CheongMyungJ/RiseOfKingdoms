@@ -94,7 +94,7 @@ namespace RiseOfKingdoms.Skill
                     actionAmount2_2 += 5;
                     actionAmount2_2 = Math.Min(15, actionAmount2_2);
                     if (UsingLog.usingLog == true)
-                        Console.WriteLine("- {0}[정사론] 탈진효과 {0}%", actionAmount2_2, at.site);
+                        Console.WriteLine("- {0}[정사론] 탈진효과 대상 부대 생명력, 방어력 {1}% 감소", at.site, actionAmount2_2);
                     actionCount2 = 5;
                 }
                 actionCount2--;

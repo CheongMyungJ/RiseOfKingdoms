@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace RiseOfKingdoms.Characteristic.Infantry
             {
                 actionAmount = (0.5 * Count);
             }
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[정예부대] 보병 공격력, 방어력, 생명력 {1}% 증가", at.site, actionAmount);
             df.tempAttack += actionAmount;
             df.tempDefence += actionAmount;
             df.tempHealth += actionAmount;

@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace RiseOfKingdoms.Characteristic.Leadership
         {
             actionAmount = (1 * Count);
             if (at.armyType == CommanderBase.ArmyType.Mixed)
+            {
                 at.tempDamageIncrease += actionAmount;
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[전원 착검] 모든 피해 {1}% 증가", at.site, actionAmount);
+            }
         }
 
         public override void AfterAction(CommanderBase at, CommanderBase df)

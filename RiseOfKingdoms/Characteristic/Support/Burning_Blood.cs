@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace RiseOfKingdoms.Characteristic.Support
             if (df.normalAttackDamage > 0)
             {
                 actionAmount = (3 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[분노의 일격] 분노 {1} 회복", at.site, actionAmount);
                 at.ragePlus += actionAmount;
             }
         }

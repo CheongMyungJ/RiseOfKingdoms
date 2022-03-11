@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,8 @@ namespace RiseOfKingdoms.Characteristic.Mobility
         public override void AfterAction(CommanderBase at, CommanderBase df)
         {
             actionAmount = (2 * Count);
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[시간관리] 이동속도 {1}% 감소", at.site, actionAmount);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using RiseOfKingdoms.Calculate;
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,13 @@ namespace RiseOfKingdoms.Characteristic.Archer
             {
                 Random random = new Random();
                 if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0)
-                    CalcDamage.CalcActiveSkillDamage(at, df, (50 * Count));
+                {
+                    actionAmount = (50 * Count);
+                    if (UsingLog.usingLog == true)
+                        Console.Write("- {0}[봉황선]", at.site);
+                    CalcDamage.CalcActiveSkillDamage(at, df, actionAmount);
+                }
+                    
             }
                 
         }

@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace RiseOfKingdoms.Characteristic.Support
             if (at.isSkillUsed)
             {
                 actionAmount = (5 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[가시우리] 대상 부대 이동속도 {1}% 감소", at.site, actionAmount);
                 actionCount = 3;
             }
             actionCount--;

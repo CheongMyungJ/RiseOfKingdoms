@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,12 @@ namespace RiseOfKingdoms.Characteristic.Infantry
         public override void AfterAction(CommanderBase at, CommanderBase df)
         {
             if (at.troop * 2 <= at.maxTroop)
+            {
                 actionAmount = (2 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[무리의부름] 부대 방어력 {1}% 증가", at.site, actionAmount);
+            }
+                
         }
     }
 }

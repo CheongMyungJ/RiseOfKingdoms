@@ -1,5 +1,7 @@
 ﻿
+using RiseOfKingdoms.Calculate;
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,6 @@ namespace RiseOfKingdoms.Characteristic.Garrison
     {
         public override void BeforeAction(CommanderBase at, CommanderBase df)
         {
-            // 방패처리코드 넣어야함.
         }
 
         public override void AfterAction(CommanderBase at, CommanderBase df)
@@ -26,10 +27,17 @@ namespace RiseOfKingdoms.Characteristic.Garrison
                 if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0)
                 {
                     actionAmount = (100 * Count);
+                    if (UsingLog.usingLog == true)
+                        Console.Write("- {0}[신의 은혜]", at.site);
+                    CalcDamage.CalcShieldEffect(at, actionAmount, 1);
                     actionCount = 1;
                 }
                 actionCount--;
             }
+        }
+        public void CharacterBonus(CommanderBase at, CommanderBase df)
+        {
+
         }
     }
 }

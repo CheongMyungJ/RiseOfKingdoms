@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace RiseOfKingdoms.Characteristic.Mobility
             Random random = new Random();
             if (random.Next(0, 10) < 3 && at.tempSpeedIncrease < 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[깨달음] 이속저하디버프 제거", at.site);
                 at.tempSpeedIncrease = 0;
             }
         }

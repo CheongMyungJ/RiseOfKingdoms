@@ -1,6 +1,7 @@
 ﻿
 using RiseOfKingdoms.Calculate;
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +22,8 @@ namespace RiseOfKingdoms.Characteristic.Defence
             if (at.isSkillUsed == true)
             {
                 actionAmount = (100 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.Write("- {0}[약초준비]", at.site);
                 CalcDamage.CalcHealingEffect(at, df, actionAmount);
             }
         }

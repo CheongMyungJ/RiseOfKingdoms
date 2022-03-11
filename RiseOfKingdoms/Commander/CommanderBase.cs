@@ -18,6 +18,9 @@ namespace RiseOfKingdoms.Commander
 
         public double maxTroop = 0;
         public double troop = 0;
+        // 방패피해흡수량
+        public double shield = 0;
+        public int shieldTurn = 0;
 
         // 침묵효과. 
         public int silenceTurn = 0;
@@ -155,12 +158,16 @@ namespace RiseOfKingdoms.Commander
             tempHealingEffect = 0;
             silenceTurn--;
             forbiddenTurn--;
+            shieldTurn--;
+            if (shieldTurn == 0)
+                shield = 0;
             tempSkillDamageIncreaseCancel = false;
         }
 
         public void Reset()
         {
             troop = maxTroop;
+            shield = 0;
             rage = 0;
             silenceTurn = 0;
             activeAttack_bf = 0;

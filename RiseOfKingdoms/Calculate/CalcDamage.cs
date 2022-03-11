@@ -111,5 +111,20 @@ namespace RiseOfKingdoms.Calculate
             return heal;
         }
 
+        public static void CalcShieldEffect(CommanderBase at, double factor, int shieldTurn)
+        {
+            double shield = factor
+                * Math.Sqrt(at.troop)
+                / 396.5;
+
+            if (at.shield < shield)
+            {
+                at.shield = shield;
+                at.shieldTurn = shieldTurn;
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine(" 피해흡수량 : {0}, {1}초 지속", shield, shieldTurn);
+            }
+        }
+
     }
 }

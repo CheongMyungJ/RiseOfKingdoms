@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,8 @@ namespace RiseOfKingdoms.Characteristic.Support
             if (at.heal > 0)
             {
                 actionAmount = (3 * Count);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[반격] 부대 공격력 {1}% 증가. 3초 지속", at.site, actionAmount);
                 actionCount = 3;
             }
             actionCount--;

@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace RiseOfKingdoms.Characteristic.Mobility
                 if (random.Next(0, 10) == 0)
                 {
                     actionAmount = (5 * Count);
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[소용돌이] 대상 부대 이동속도 {1}% 감소. 3초 지속", at.site, actionAmount);
                     actionCount = 3;
                 }
             }

@@ -22,7 +22,7 @@ namespace RiseOfKingdoms.Equip.Legendary
             {
                 actionAmount = (isStrengthen ? 65 : 50);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("- {0}[클라크의 전투북] 분노 {1}% 회복", at.site, actionAmount);
+                    Console.WriteLine("- {0}[클라크의 전투북] 분노 {1} 회복", at.site, actionAmount);
                 at.ragePlus += actionAmount;
                 actionCount = 3;
             }

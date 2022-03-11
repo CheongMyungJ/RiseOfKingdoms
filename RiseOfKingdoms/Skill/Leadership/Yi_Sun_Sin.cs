@@ -104,7 +104,10 @@ namespace RiseOfKingdoms.Skill
                 if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0)
                 {
                     if (UsingLog.usingLog == true)
-                        Console.WriteLine("- {0}[학익진] 500계수 방패 발동. 반격 피해 30% 증가. 3초 지속", at.site);
+                        Console.WriteLine("- {0}[학익진] 반격 피해 30% 증가. 3초 지속", at.site);
+                    if (UsingLog.usingLog == true)
+                        Console.Write("- {0}[학익진] 방패 {1}계수 발동", at.site, 500);
+                    CalcDamage.CalcShieldEffect(at, 500, 3);
                     actionAmount3_2 = 30;
                     actionCount3 = 3;
                 }

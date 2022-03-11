@@ -1,4 +1,5 @@
 ﻿
+using RiseOfKingdoms.Calculate;
 using RiseOfKingdoms.Commander;
 using RiseOfKingdoms.Common;
 using System;
@@ -13,7 +14,6 @@ namespace RiseOfKingdoms.Equip.Legendary
     {
         public override void BeforeAction(CommanderBase at, CommanderBase df)
         {
-            // 방패 처리해야함.
         }
 
         double actionAmount2 = 0;
@@ -27,7 +27,8 @@ namespace RiseOfKingdoms.Equip.Legendary
             {
                 actionAmount = (isStrengthen ? 650 : 500);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("- {0}[스콜라스의 행운코인] 방패 {1}계수 발동", at.site, actionAmount);
+                    Console.Write("- {0}[스콜라스의 행운코인] 방패 {1}계수 발동 ", at.site, actionAmount);
+                CalcDamage.CalcShieldEffect(at, actionAmount, 3); 
                 actionCount = 3;
             }
             actionCount--;
