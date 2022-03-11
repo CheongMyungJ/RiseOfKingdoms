@@ -24,13 +24,17 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 필드에서 계수 2000, 주둔시 1400계수. 대상행속 30퍼감소 3초지속
-            if (at.battleState != CommanderBase.BattleState.Garrison)
-                extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 2000);
-            else
-                extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1400);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[충무공]", at.site);
+            if (at.battleState != CommanderBase.BattleState.Garrison)
+                CalcDamage.CalcActiveSkillDamage(at, df, 2000);
+            else
+                CalcDamage.CalcActiveSkillDamage(at, df, 1400);
+            
             at.isSkillUsed = true;
+
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[충무공] 대상 부대 행군속도 30% 감소. 3초 지속", at.site);
 
             actionAmount0 = 30;
             actionCount0 = 3;
@@ -53,6 +57,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount1 <= 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[명량해전] 부대 방어력 20% 증가 모든 피해 15% 증가. 3초 지속", at.site);
                     actionAmount1 = 5;
                     actionCount1 = 3;
                 }
@@ -69,6 +75,8 @@ namespace RiseOfKingdoms.Skill
             // 통솔부대 방어력 30퍼 증가. 부대 50퍼 미만이면 피증 20퍼
             if (at.troop * 2 <= at.maxTroop)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[거북선 수익] 모든 피해 20% 증가", at.site);
                 actionAmount2 = 20;
             }
         }
@@ -95,6 +103,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[학익진] 500계수 방패 발동. 반격 피해 30% 증가. 3초 지속", at.site);
                     actionAmount3_2 = 30;
                     actionCount3 = 3;
                 }

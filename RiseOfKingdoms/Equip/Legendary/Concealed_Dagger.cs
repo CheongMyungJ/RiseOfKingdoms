@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace RiseOfKingdoms.Equip.Legendary
             {
                 actionAmount += (isStrengthen ? 6.5 : 5);
                 actionAmount = Math.Min(actionAmount, (isStrengthen ? 19.5 : 15));
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[날카로운 비수] 대상 부대 생명력 {1}% 감소. 3초 지속", at.site, actionAmount);
                 actionCount = 3;
             }
             actionCount--;

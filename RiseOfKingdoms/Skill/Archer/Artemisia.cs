@@ -19,9 +19,11 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 피해계수 1800, 나에게 피해계수 300
-            double damage = CalcDamage.CalcActiveSkillDamage(at, df, 1800);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", damage);
+                Console.Write("- {0}[살라미스 전투]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 1800);
+            if (UsingLog.usingLog == true)
+                Console.Write("- {0}[살라미스 전투]", at.site);
             CalcDamage.CalcActiveSkillDamage(at, at, 300);
 
             at.isSkillUsed = true;
@@ -52,6 +54,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[크세르크세스의 맹우] 대상부대에 금수효과 1초 지속", at.site);
                     df.forbiddenTurn = 2;
                 }
             }
@@ -70,6 +74,8 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (at.rage >= at.maxRage * 0.8 && random.Next(0, 2) == 0 && actionCount3 <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[카리아 여왕] 대상 부대에 3초 침묵, 통솔부대 피해 50 증가 5초 지속", at.site);
                 if (at.silenceTurn <= 1)
                     at.silenceTurn = 4;
                 actionAmount3 = 50;
@@ -78,6 +84,7 @@ namespace RiseOfKingdoms.Skill
             actionCount3--;
         }
 
+        double actionAmountNew_2 = 0;
         public override void NewBefore(CommanderBase at, CommanderBase df)
         {
             df.tempSkillDamageIncrease += actionAmountNew;
@@ -90,13 +97,23 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCountNew <= 0)
             {
-                double damage = CalcDamage.CalcActiveSkillDamage(at, df, 400);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("@스킬시전 {0}", damage);
+                    Console.Write("- {0}[생존의 법칙]", at.site);
+                actionAmountNew_2 = CalcDamage.CalcActiveSkillDamage(at, df, 400);
+                AddAfterSkillBonus(at, 0, 2, NewBonus);
+
+                if (UsingLog.usingLog == true)
+                    Console.Write("- {0}[생존의 법칙] 대상 부대의 스킬피해 15% 증가. 3초 지속", at.site);
                 actionAmountNew = 15;
                 actionCountNew = 3;
             }
             actionCountNew--;
+        }
+        public void NewBonus(CommanderBase at, CommanderBase df)
+        {
+            if (UsingLog.usingLog == true)
+                Console.Write("- {0}[생존의 법칙]", at.site);
+            CalcDamage.CalcAdditionalSkillDamage(df, actionAmountNew_2);
         }
     }
 }

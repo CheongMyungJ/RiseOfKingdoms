@@ -12,7 +12,7 @@ namespace RiseOfKingdoms.Skill
     internal class Honda_Tadakatsu : SkillBase
     {
         bool isFirst = true;
-        public override void Init(CommanderBase bs, bool isFirst)
+        public override void Init(CommanderBase bs, bool isFirst, int cnt)
         {
             base.Init(bs, isFirst);
             this.isFirst = isFirst;
@@ -22,16 +22,15 @@ namespace RiseOfKingdoms.Skill
         {
         }
 
-        double extraDamage;
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 주사령관이면 2500, 부사령관이면 1250 딜
-            if (isFirst == true)
-                extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 2500);
-            else
-                extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1250);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[톤보키리]", at.site);
+            if (isFirst == true)
+                CalcDamage.CalcActiveSkillDamage(at, df, 2500);
+            else
+                CalcDamage.CalcActiveSkillDamage(at, df, 1250);
             at.isSkillUsed = true;
         }
 
@@ -63,6 +62,8 @@ namespace RiseOfKingdoms.Skill
 
             if (at.isSkillUsed == true && actionCount2 <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.Write("- {0}[화실겸비]", at.site);
                 actionAmount2_3 = CalcDamage.CalcActiveSkillDamage(at, df, 200, false);
                 AddAfterSkillBonus(at, 0, 2, Passive2Bonus);
                 actionAmount2_2 = 50;
@@ -72,9 +73,9 @@ namespace RiseOfKingdoms.Skill
         }
         public void Passive2Bonus(CommanderBase at, CommanderBase df)
         {
-            CalcDamage.CalcAdditionalSkillDamage(df, actionAmount2_3);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@추가스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[화실 겸비]", at.site);
+            CalcDamage.CalcAdditionalSkillDamage(df, actionAmount2_3);
         }
 
 
@@ -95,6 +96,8 @@ namespace RiseOfKingdoms.Skill
             int troopDecreaseRate = (int)((1 - (at.troop / at.maxTroop)) * 100);
             actionAmount3 = (troopDecreaseRate / factor) * 5;
             actionAmount3 = Math.Min(actionAmount3, 60);
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[도쿠가와 사천왕] 스킬피해 {1}% 증가", at.site, actionAmount3);
         }
 
         public override void NewBefore(CommanderBase at, CommanderBase df)
@@ -105,8 +108,10 @@ namespace RiseOfKingdoms.Skill
             // 필드에서 일반공격피해받으면 해당피해 30퍼감소시킴 최대 57회
             if (at.battleState != CommanderBase.BattleState.Garrison && at.normalAttackDamage > 0 && actionCountNew > 0)
             {
-                at.normalAttackDamage *= 0.7;
                 actionCountNew--;
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[불패의 역] 데미지 {1} 감소. {2}턴 남음", at.site, Math.Round(at.normalAttackDamage * 0.3), actionCountNew);
+                at.normalAttackDamage *= 0.7;
             }
         }
     }

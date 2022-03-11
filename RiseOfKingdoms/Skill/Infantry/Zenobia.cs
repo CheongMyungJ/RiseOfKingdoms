@@ -30,10 +30,13 @@ namespace RiseOfKingdoms.Skill
             // 주변잔여병력퍼센트 가장낮은 한 아군부대(통솔부대포함)을 치료하며(300계수)
             // 다음1턴간 통솔부대를 추가로 치료합니다(계수1100)
             // 치료된 부대는 2초간 생명력이 지속적으로 50퍼 증가하며 입히는 모든 피해 30퍼 증가
-            CalcDamage.CalcHealingEffect(at, df, 300);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@치료스킬시전 {0}", heal);
+                Console.Write("- {0}[팔미라 여왕]", at.site);
+            CalcDamage.CalcHealingEffect(at, df, 300);
             at.isSkillUsed = true;
+
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[팔미라 여왕] 치료된 부대 생명력 지속적으로 50% 증가 모든 피해 30% 증가. 2초 지속", at.site);
 
             actionAmount0 = 50;
             actionAmount0_2 = 30;
@@ -41,9 +44,9 @@ namespace RiseOfKingdoms.Skill
         }
         public void ActiveBonus(CommanderBase at, CommanderBase df)
         {
-            CalcDamage.CalcHealingEffect(at, df, 1100);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@치료스킬시전 {0}", heal);
+                Console.Write("- {0}[팔미라 여왕]", at.site);
+            CalcDamage.CalcHealingEffect(at, df, 1100);
         }
 
 
@@ -83,9 +86,9 @@ namespace RiseOfKingdoms.Skill
             if (at.battleState == CommanderBase.BattleState.Garrison && df.normalAttackDamage > 0 && actionCount3 <= 0)
             {
                 actionAmount3 = 600;
-                double Damage = CalcDamage.CalcActiveSkillDamage(at, df, actionAmount3);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("@추가스킬시전 {0}", Damage);
+                    Console.Write("- {0}[다원의 통치]", at.site);
+                CalcDamage.CalcActiveSkillDamage(at, df, actionAmount3);
                 AddAfterSkillBonus(at, 0, 2, Passive3Bonus);
                 actionCount3 = 5;
             }
@@ -93,9 +96,9 @@ namespace RiseOfKingdoms.Skill
         }
         public void Passive3Bonus(CommanderBase at, CommanderBase df)
         {
-            double Damage = CalcDamage.CalcActiveSkillDamage(at, df, actionAmount3);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@추가스킬시전 {0}", Damage);
+                Console.Write("- {0}[다원의 통치]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, actionAmount3);
         }
 
         public override void NewBefore(CommanderBase at, CommanderBase df)

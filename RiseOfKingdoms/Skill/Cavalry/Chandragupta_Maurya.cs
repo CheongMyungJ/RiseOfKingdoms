@@ -13,7 +13,6 @@ namespace RiseOfKingdoms.Skill
     {
         public override void ActiveBefore(CommanderBase at, CommanderBase df)
         {
-            actionAmount0 = 40;
             at.tempDamageIncrease += actionAmount0;
 
             actionCount0--;
@@ -31,9 +30,13 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 스킬시전후 3초간 모든피해 40증가. 축복효과 1회 획득. 10초지속 4한도
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[월호왕] 축복효과 1회 획득. 모든 피해 40% 증가. 3초 지속", at.site);
             actionAmount0_2 += 1;
             actionAmount0_2 = Math.Min(4, actionAmount0_2);
             actionCount0_2 = 10;
+
+            actionAmount0 = 40;
             actionCount0 = 3;
             togle = !togle;
 
@@ -56,6 +59,8 @@ namespace RiseOfKingdoms.Skill
             {
                 if (togle != togle2)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[황실 코끼리] 축복효과 1회 획득", at.site);
                     togle2 = togle;
                     actionAmount0_2 += 1;
                     actionAmount0_2 = Math.Min(4, actionAmount0_2);
@@ -88,6 +93,8 @@ namespace RiseOfKingdoms.Skill
                 {
                     actionAmount2_2 += 5;
                     actionAmount2_2 = Math.Min(15, actionAmount2_2);
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[정사론] 탈진효과 {0}%", actionAmount2_2, at.site);
                     actionCount2 = 5;
                 }
                 actionCount2--;
@@ -110,18 +117,16 @@ namespace RiseOfKingdoms.Skill
             // 기병에게 받는 피해 5퍼감소 스킬시전시 3초간 행속 25퍼증가. 스킬시전시 대상에게 500*축복효과 피해
             if (actionCount3 == 0)
                 actionAmount3_2 = 0;
-            if (at.isSkillUsed == true)
+            if (at.isSkillUsed == true && actionCount3 <= 0)
             {
                 actionAmount3_2 = 25;
                 actionCount3 = 3;
-                skillDamage = CalcDamage.CalcActiveSkillDamage(at, df, 500 * actionAmount0_2);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("@스킬시전 {0}", skillDamage);
+                    Console.Write("- {0}[고행]", at.site);
+                CalcDamage.CalcActiveSkillDamage(at, df, 500 * actionAmount0_2);
                 actionAmount0_2 = 0;
-                actionCount0_2 = 0;
             }
             actionCount3--;
-
         }
 
         public override void NewBefore(CommanderBase at, CommanderBase df)
@@ -133,10 +138,18 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (df.normalAttackDamage > 0 && random.Next(0, 2) == 0 && actionCountNew <= 0)
             {
-                if (at.battleState == CommanderBase.BattleState.Garrison)   
+                if (at.battleState == CommanderBase.BattleState.Garrison)
+                {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[마우리야 왕조] 축복효과 1회 획득", at.site);
                     actionAmount0_2 += 1;
+                }
                 else
+                {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[마우리야 왕조] 축복효과 2회 획득", at.site);
                     actionAmount0_2 += 2;
+                }   
 
                 actionAmount0_2 = Math.Min(4, actionAmount0_2);
                 actionCount0_2 = 10;

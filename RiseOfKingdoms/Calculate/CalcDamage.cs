@@ -1,4 +1,5 @@
 ﻿using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,13 +43,20 @@ namespace RiseOfKingdoms.Calculate
                 * (df.baseHealth * (100 + df.additionalHealth + df.tempHealth + df.activeHealth_bf - df.activeHealth_dbf)/100.0));
 
             if (applyNow == true)
+            {
                 df.skillDamage += damage;
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine(" 스킬데미지 : {0}", damage);
+            }
+                
 
             return damage;
         }
         public static void CalcAdditionalSkillDamage(CommanderBase df, double damage)
         {
             df.skillDamage += damage;
+            if (UsingLog.usingLog == true)
+                Console.WriteLine(" 스킬데미지 : {0}", damage);
         }
         public static void CalcNormalDamage(CommanderBase at, CommanderBase df, double factor = 1 / 0.00517)
         {
@@ -65,6 +73,8 @@ namespace RiseOfKingdoms.Calculate
                 * (df.baseHealth * (100 + df.additionalHealth + df.tempHealth + df.activeHealth_bf - df.activeHealth_dbf) / 100.0));
 
             df.normalAttackDamage += damage;
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}이 입힌 일반데미지 : {1}", at.site, damage);
             at.ragePlus += 86;
         }
         public static void CalcCounterDamage(CommanderBase at, CommanderBase df, double factor = 1 / 0.00517)
@@ -82,6 +92,8 @@ namespace RiseOfKingdoms.Calculate
                 * (df.baseHealth * (100 + df.additionalHealth + df.tempHealth + df.activeHealth_bf - df.activeHealth_dbf) / 100.0));
 
             df.counterAttackDamage += damage;
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}이 입힌 반격데미지 : {1}", at.site, damage);
             at.ragePlus += 16;
         }
         public static double CalcHealingEffect(CommanderBase at, CommanderBase df, double factor)
@@ -93,6 +105,8 @@ namespace RiseOfKingdoms.Calculate
                 / (at.baseDefence * at.baseHealth);
 
             at.heal += heal;
+            if (UsingLog.usingLog == true)
+                Console.WriteLine(" 치료량 : {0}", heal);
 
             return heal;
         }

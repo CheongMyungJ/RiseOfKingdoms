@@ -58,11 +58,13 @@ namespace RiseOfKingdoms.Common
 
                     if (isAttacker)
                     {
+                        commander.site = "공격측";
                         Commanders.atkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
                         commander.commanderClassList.Add((Commanders.atkeyValuePairs[(CommanderList)enumCommander], isFirst));
                     }
                     else
                     {
+                        commander.site = "수비측";
                         Commanders.dfkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
                         commander.commanderClassList.Add((Commanders.dfkeyValuePairs[(CommanderList)enumCommander], isFirst));
                     }
@@ -398,12 +400,12 @@ namespace RiseOfKingdoms.Common
                         Console.Write("{0} {1}단계 ", Enum.GetName(Character.CharacterSubCharacterPairs[(CharacterList)eNum].GetType(), num), count);
                         if (isAttacker == true)
                         {
-                            Character.atkeyValuePairs[(Enum)enumCharacter].Init(commander, count);
+                            Character.atkeyValuePairs[(Enum)enumCharacter].Init(commander, true, count);
                             commander.characterClassList.Add((Character.atkeyValuePairs[(Enum)enumCharacter], count));
                         }
                         else
                         {
-                            Character.dfkeyValuePairs[(Enum)enumCharacter].Init(commander, count);
+                            Character.dfkeyValuePairs[(Enum)enumCharacter].Init(commander, true, count);
                             commander.characterClassList.Add((Character.dfkeyValuePairs[(Enum)enumCharacter], count));
                         }
                     }
@@ -459,9 +461,9 @@ namespace RiseOfKingdoms.Common
             {
                 string numString = Console.ReadLine();
                 int num = 0;
-                if (int.TryParse(numString, out num) == false || (num < 1 || num > 10000))
+                if (int.TryParse(numString, out num) == false || (num < 1 || num > 100000))
                 {
-                    Console.WriteLine("정확한 숫자를 입력해주세요. 최대 10000까지 입력 가능");
+                    Console.WriteLine("정확한 숫자를 입력해주세요. 최대 100000까지 입력 가능");
                 }
                 else
                 {

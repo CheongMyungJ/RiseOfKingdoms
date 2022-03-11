@@ -26,17 +26,19 @@ namespace RiseOfKingdoms.Skill
             }
         }
 
-        double extraDamage;
         bool togle = true;
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 1500 계수 스킬
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1500);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[혈통의 비밀]", at.site);
+             CalcDamage.CalcActiveSkillDamage(at, df, 1500);
+            
             at.isSkillUsed = true;
             togle = !togle;
 
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[혈통의 비밀] 대상 부대 스킬피해 증가 버프 금지 행군속도 30% 감소. 3초 지속", at.site);
             actionBool = true;
             actionAmount0 = 30;
             actionCount0 = 3;
@@ -67,6 +69,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (random.Next(0, 10) == 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.Write("- {0}[노르만 정복]", at.site);
                     CalcDamage.CalcActiveSkillDamage(at, df, 1000);
                 }
             }
@@ -86,6 +90,8 @@ namespace RiseOfKingdoms.Skill
             // 액티브스킬명중시 부대방어력 20퍼증가 3초지속.
             if (togle != togle2)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[북방의 재난] 부대 방어력 20% 증가. 3초 지속", at.site);
                 togle2 = togle;
                 actionAmount3 = 20;
                 actionCount3 = 3;

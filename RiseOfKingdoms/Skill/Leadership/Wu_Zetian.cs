@@ -18,12 +18,13 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 피해계수 1000, 치료 500계수
-            double damage = CalcDamage.CalcActiveSkillDamage(at, df, 1000);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", damage);
-            double heal = CalcDamage.CalcHealingEffect(at, df, 500);
+                Console.Write("- {0}[용동봉경]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 1000);
+
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@치료스킬시전 {0}", heal);
+                Console.Write("- {0}[용동봉경]", at.site);
+            CalcDamage.CalcHealingEffect(at, df, 500);
 
             at.isSkillUsed = true;
         }
@@ -56,6 +57,8 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[붉은 눈물] 대상 부대 2초간 침묵", at.site);
                 AddAfterSkillBonus(at, 0, 1, Passive2Bonus);
             }
         }
@@ -86,6 +89,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (at.skillDamage > 0 && random.Next(0, 2) == 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[무자 비석] 부대 방어력 20% 증가. 3초 지속", at.site);
                     actionAmount3_2 = 20;
                     actionCount3 = 3;
                 }
@@ -102,9 +107,9 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0)
             {
-                double damage = CalcDamage.CalcActiveSkillDamage(at, df, 500);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("@추가스킬시전 {0}", damage);
+                    Console.Write("- {0}[여왕 만세]", at.site);
+                CalcDamage.CalcActiveSkillDamage(at, df, 500);
             }
         }
     }

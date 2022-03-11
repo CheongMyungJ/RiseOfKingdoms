@@ -11,13 +11,12 @@ namespace RiseOfKingdoms.Skill
 {
     internal class Markswoman : SkillBase
     {
-        public double extraDamage;
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 100 계수 스킬
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 100);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[기습]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 100);
         }
 
         public override void Passive1Before(CommanderBase at, CommanderBase df)

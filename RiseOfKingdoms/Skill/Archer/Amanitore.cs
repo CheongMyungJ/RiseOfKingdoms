@@ -24,11 +24,14 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 피해계수 1300, 통솔부대 피해 20퍼 증가 3초지속
-            double damage = CalcDamage.CalcActiveSkillDamage(at, df, 1300);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", damage);
+                Console.Write("- {0}[영광의화살]",at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 1300);
+            
             at.isSkillUsed = true;
 
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[영광의 화살] 통솔부대 모든 피해 20% 증가 3초 지속", at.site);
             actionAmount0 = 20;
             actionCount0 = 3;
         }
@@ -75,6 +78,8 @@ namespace RiseOfKingdoms.Skill
                 if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount2 <= 0)
                 {
                     //하랄스택초기화 어떻게할지..
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[타세티의 인내] 상대 지속성 공격력 증가 효과 해제", at.site);
                     actionCount2 = 10;
                 }
                 actionCount2--;
@@ -89,24 +94,24 @@ namespace RiseOfKingdoms.Skill
             // 스킬피해 입으면 800계수 피해. 주둔사령일때 50퍼 확률로 500피해 20퍼확률로 400피해 10초에 한번발동
             if (at.skillDamage > 0 && actionCount3 <= 0)
             {
-                double damage = CalcDamage.CalcActiveSkillDamage(at, df, 800);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("@추가스킬시전 {0}", damage);
+                    Console.Write("- {0}[격노의 여왕]", at.site);
+                CalcDamage.CalcActiveSkillDamage(at, df, 800);
 
                 if (at.battleState == CommanderBase.BattleState.Garrison)
                 {
                     Random random = new Random();
                     if (random.Next(0, 2) == 0)
                     {
-                        damage = CalcDamage.CalcActiveSkillDamage(at, df, 500);
                         if (UsingLog.usingLog == true)
-                            Console.WriteLine("@추가스킬시전 {0}", damage);
+                            Console.Write("- {0}[격노의 여왕]", at.site);
+                        CalcDamage.CalcActiveSkillDamage(at, df, 500);
                     }
                     if (random.Next(0, 5) == 0)
                     {
-                        damage = CalcDamage.CalcActiveSkillDamage(at, df, 400);
                         if (UsingLog.usingLog == true)
-                            Console.WriteLine("@추가스킬시전 {0}", damage);
+                            Console.Write("- {0}[격노의 여왕]", at.site);
+                        CalcDamage.CalcActiveSkillDamage(at, df, 400);
                     }
                 }
                 actionCount3 = 10;
@@ -123,6 +128,8 @@ namespace RiseOfKingdoms.Skill
             // 침묵에 면역. 액티브스킬시전시 대상분노 100감소 2초지속 10초에 한번발동
             if (at.isSkillUsed == true && actionCountNew <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[누비아의 의지] 대상 부대의 분노 100 감소 2초 지속", at.site);
                 actionAmountNew = 100;
                 df.rageMinus += actionAmountNew;
                 AddAfterSkillBonus(at, 0, 1, NewBonus);

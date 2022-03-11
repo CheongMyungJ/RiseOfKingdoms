@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,8 @@ namespace RiseOfKingdoms.Equip.Epic
             if (df.normalAttackDamage > 0)
             {
                 actionAmount = (isStrengthen ? 13 : 10);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[고요한 심판] 대상 부대 분노 {1}% 감소", at.site, actionAmount);
                 df.rageMinus += actionAmount;
             }
         }

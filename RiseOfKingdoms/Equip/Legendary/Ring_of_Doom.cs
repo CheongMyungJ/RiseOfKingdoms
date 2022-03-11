@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace RiseOfKingdoms.Equip.Legendary
             if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount <= 0)
             {
                 actionAmount = (isStrengthen ? 65 : 50);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[심판의 반지] 모든 피해 {1}% 증가. 2초 지속", at.site, actionAmount);
                 actionCount = 5;
             }
             actionCount--;

@@ -19,10 +19,12 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 피해계수 1700 스킬시전시 디버프 정화
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1700);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[비잔틴 황후]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 1700);
             at.isSkillUsed = true;
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[비잔틴 황후] 모든 디버프 제거", at.site);
             // 정화 구현해야함.
         }
 
@@ -56,6 +58,8 @@ namespace RiseOfKingdoms.Skill
             // 부대 공격력 10퍼증가 병력 50퍼 이상일때 피해 10퍼증가
             if (at.troop * 2 >= at.maxTroop)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[공동 통치자] 모든 피해 10% 증가", at.site);
                 actionAmount2 = 10;
             }
         }
@@ -76,6 +80,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[황실의 권력] 모든 피해 40% 증가. 3초 지속", at.site);
                     actionAmount3 = 40;
                     actionCount3 = 3;
                 }

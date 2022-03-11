@@ -16,9 +16,9 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 1400계수. 75퍼확률로 추가피해 600계수 2초간
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1400);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[경팔류]", at.site);
+            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1400);
             Random random = new Random();
             if (random.Next(0, 4) < 3)
             {
@@ -29,9 +29,9 @@ namespace RiseOfKingdoms.Skill
         }
         public void ActiveBonus(CommanderBase at, CommanderBase df)
         {
-            CalcDamage.CalcAdditionalSkillDamage(df, extraDamage);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@추가스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[경팔류]", at.site);
+            CalcDamage.CalcAdditionalSkillDamage(df, extraDamage);
         }
 
         public override void Passive1Before(CommanderBase at, CommanderBase df)
@@ -64,6 +64,8 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount3 <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[명장] 대상 부대 받는피해 30% 증가. 3초 지속", at.site);
                 actionAmount3 = 30;
                 actionCount3 = 5;
             }

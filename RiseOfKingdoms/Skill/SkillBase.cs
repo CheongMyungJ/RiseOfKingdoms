@@ -10,7 +10,7 @@ namespace RiseOfKingdoms.Skill
 {
     internal class SkillBase : MethodBase
     {
-        public virtual void Init(CommanderBase bs, bool isFirst)
+        public override void Init(CommanderBase bs, bool isFirst = true, int cnt = 0)
         {
             DelegateMethod Passive1Before = new DelegateMethod(this.Passive1Before);
             DelegateMethod Passive2Before = new DelegateMethod(this.Passive2Before);

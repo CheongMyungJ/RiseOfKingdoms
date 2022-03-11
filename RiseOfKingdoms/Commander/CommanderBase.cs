@@ -1,4 +1,5 @@
 ﻿using RiseOfKingdoms.Characteristic;
+using RiseOfKingdoms.Common;
 using RiseOfKingdoms.Equip;
 using RiseOfKingdoms.Skill;
 using System;
@@ -13,6 +14,8 @@ namespace RiseOfKingdoms.Commander
 {
     internal class CommanderBase
     {
+        public string site = string.Empty;
+
         public double maxTroop = 0;
         public double troop = 0;
 
@@ -107,9 +110,9 @@ namespace RiseOfKingdoms.Commander
         public List<List<DelegateMethod>> active_skill_bonus_list;
         public List<List<DelegateMethod>> before_skill_bonus_list;
 
-        public List<(SkillBase, bool)> commanderClassList;
-        public List<(CharacterBase, int)> characterClassList;
-        public List<(EquipmentBase, bool)> equipmentClassList;
+        public List<(MethodBase, bool)> commanderClassList;
+        public List<(MethodBase, int)> characterClassList;
+        public List<(MethodBase, bool)> equipmentClassList;
 
         public List<Enum> commanderCharacter;
 
@@ -122,9 +125,9 @@ namespace RiseOfKingdoms.Commander
             active_skill_bonus_list = new List<List<DelegateMethod>>();
             before_skill_bonus_list = new List<List<DelegateMethod>>();
             commanderCharacter = new List<Enum>();
-            commanderClassList = new List<(SkillBase, bool)>();
-            characterClassList = new List<(CharacterBase, int)>();
-            equipmentClassList = new List<(EquipmentBase, bool)>();
+            commanderClassList = new List<(MethodBase, bool)>();
+            characterClassList = new List<(MethodBase, int)>();
+            equipmentClassList = new List<(MethodBase, bool)>();
         }
 
         public void Final()
@@ -198,7 +201,7 @@ namespace RiseOfKingdoms.Commander
             }
             foreach (var data in characterClassList)
             {
-                data.Item1.Init(this, data.Item2);
+                data.Item1.Init(this, cnt : data.Item2);
             }
             foreach (var data in equipmentClassList)
             {

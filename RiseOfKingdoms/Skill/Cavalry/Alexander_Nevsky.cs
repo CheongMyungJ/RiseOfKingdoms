@@ -16,9 +16,9 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 2300 계수 스킬
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 2300);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[페이푸스 호수]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 2300);
             at.isSkillUsed = true;
         }
 
@@ -63,6 +63,8 @@ namespace RiseOfKingdoms.Skill
 
                 if (at.isSkillUsed && actionCount3 <= 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[루스 철기병] 스킬시전 후 스킬피해 35% 증가. 4초 지속", at.site);
                     actionAmount3_2 = 35;
                     actionCount3 = 5;
                 }
@@ -83,6 +85,8 @@ namespace RiseOfKingdoms.Skill
             Random random = new Random();
             if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCountNew <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[겨울의 폭풍] 기마병 생명력 30% 증가. 3초 지속", at.site);
                 if (at.armyType == CommanderBase.ArmyType.Cavalry)
                     actionAmountNew = 30;
                 actionCountNew = 5;

@@ -16,6 +16,10 @@ namespace RiseOfKingdoms.Common
             int turn = 1;
             while (at.troop > 0 && df.troop > 0)
             {
+                if (isRepeat == false)
+                    Console.WriteLine(" {0}번째 턴========================================================", turn++);
+                
+
                 BeforeAction(at, df);
 
                 //일반공격
@@ -31,9 +35,8 @@ namespace RiseOfKingdoms.Common
 
                 if (isRepeat == false)
                 {
-                    Console.WriteLine("{0}번째 턴=================", turn++);
-                    Console.WriteLine("공격측 남은 부대수 : {0}", at.troop);
-                    Console.WriteLine("수비측 남은 부대수 : {0}", df.troop);
+                    Console.WriteLine("@공격측 남은 부대수 : {0}", at.troop);
+                    Console.WriteLine("@수비측 남은 부대수 : {0}", df.troop);
                 }
             }
             if (at.troop <= 0 && df.troop <= 0)
@@ -155,10 +158,11 @@ namespace RiseOfKingdoms.Common
                 }
                 at.Reset();
                 df.Reset();
+                Console.Write("분석중 {0}%\r", Math.Round(((double)i / cnt) * 100d, 2));
             }
-            Console.WriteLine("무승부 확률 : {0}%", (drawCount / (drawCount  + atWinCount + dfWinCount)) * 100);
-            Console.WriteLine("공격 승리 확률 : {0}%, 남은 부대수 평균 : {1}", (atWinCount/(drawCount + atWinCount + dfWinCount)) * 100, Math.Round(atLeftTroop / atWinCount));
-            Console.WriteLine("수비 승리 확률 : {0}, 남은 부대수 평균 : {1}", (dfWinCount / (drawCount + atWinCount + dfWinCount)) * 100, Math.Round(dfLeftTroop / dfWinCount));
+            Console.WriteLine("무승부 확률 : {0}%", Math.Round((drawCount / (drawCount  + atWinCount + dfWinCount)) * 100, 2));
+            Console.WriteLine("공격측 승리 확률 : {0}%, 남은 부대수 평균 : {1}", Math.Round((atWinCount/(drawCount + atWinCount + dfWinCount)) * 100, 2), Math.Round(atLeftTroop / atWinCount));
+            Console.WriteLine("수비측 승리 확률 : {0}, 남은 부대수 평균 : {1}", Math.Round((dfWinCount / (drawCount + atWinCount + dfWinCount)) * 100, 2), Math.Round(dfLeftTroop / dfWinCount));
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿
 using RiseOfKingdoms.Commander;
+using RiseOfKingdoms.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace RiseOfKingdoms.Equip.Legendary
             if (df.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount <= 0)
             {
                 actionAmount = (isStrengthen ? 65 : 50);
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[클라크의 전투북] 분노 {1}% 회복", at.site, actionAmount);
                 at.ragePlus += actionAmount;
                 actionCount = 3;
             }

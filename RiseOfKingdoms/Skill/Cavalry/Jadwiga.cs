@@ -20,15 +20,16 @@ namespace RiseOfKingdoms.Skill
                 actionAmount0 = 0;
         }
 
-        double extraDamage;
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 1500계수. 모피증 20퍼증가 3초지속
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1500);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[경건의 힘]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 1500);
             at.isSkillUsed = true;
 
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[경건의 힘] 모든 피해 20% 증가. 3초 지속", at.site);
             actionAmount0 = 20;
             actionCount0 = 3;
         }
@@ -91,6 +92,8 @@ namespace RiseOfKingdoms.Skill
 
             if (at.skillDamage > 0 && actionCount3 <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[회피의 칼날] 분노 50 회복", at.site);
                 actionAmount3 = 50;
                 at.ragePlus += actionAmount3;
                 AddAfterSkillBonus(at, 0, 2, Passive3Bonus);
@@ -100,6 +103,8 @@ namespace RiseOfKingdoms.Skill
         }
         public void Passive3Bonus(CommanderBase at, CommanderBase df)
         {
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[회피의 칼날] 분노 50 회복", at.site);
             at.ragePlus += actionAmount3;
         }
 
@@ -120,6 +125,8 @@ namespace RiseOfKingdoms.Skill
             // 집결부대에게 입히는 피해 10퍼증가. 스킬시전시 받피감 10퍼 4초지속
             if (at.isSkillUsed == true)
             {
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[폴란드의 성왕] 받는 피해 10% 감소. 4초 지속", at.site);
                 actionAmountNew2 = 10;
                 actionCountNew = 4;
             }

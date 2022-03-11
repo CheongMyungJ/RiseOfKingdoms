@@ -11,7 +11,7 @@ namespace RiseOfKingdoms.Equip
     internal class EquipmentBase : MethodBase
     {
         protected bool isStrengthen = false;
-        public virtual void Init(CommanderBase bs, bool _isStrengthen)
+        public override void Init(CommanderBase bs, bool _isStrengthen = true, int cnt = 0)
         {
             isStrengthen = _isStrengthen; 
             bs.before_skill.Add(new DelegateMethod(BeforeAction));

@@ -12,7 +12,7 @@ namespace RiseOfKingdoms.Skill
 {
     internal class Xiang_Yu : SkillBase
     {
-        public override void Init(CommanderBase bs, bool isFirst)
+        public override void Init(CommanderBase bs, bool isFirst, int cnt)
         {
             base.Init(bs, isFirst);
             if (isFirst == true)
@@ -26,12 +26,15 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 1700 계수 스킬
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 1700);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[패왕의 용기]", at.site);
+            CalcDamage.CalcActiveSkillDamage(at, df, 1700);
+            
             at.isSkillUsed = true;
             togle = !togle;
 
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[패왕의 용기] 대상 부대 방어력 30% 감소. 3초 지속", at.site);
             // 방깍 3초
             AddBeforeSkillBonus(at, 3, ActiveBonusStart, ActiveBonusEnd);
         }
@@ -76,6 +79,8 @@ namespace RiseOfKingdoms.Skill
                 Random random = new Random();
                 if (random.Next(0, 10) == 0 && actionCount2 <= 0)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.Write("- {0}[천하난무]", at.site);
                     CalcDamage.CalcActiveSkillDamage(at, df, 400);
                     actionCount2 = 3;
                 }
@@ -97,11 +102,20 @@ namespace RiseOfKingdoms.Skill
             if (togle != togle2)
             {
                 togle2 = togle;
+                
                 if (at.armyType == ArmyType.Cavalry)
                 {
                     actionAmount3 += 5;
                     actionAmount3 = Math.Min(30, actionAmount3);
                 }
+                else if (at.armyType == ArmyType.Mixed)
+                {
+                    actionAmount3 += (5 / 3);
+                    actionAmount3 = Math.Min(10, actionAmount3);
+                }
+                if (UsingLog.usingLog == true)
+                    Console.WriteLine("- {0}[쾌전상승] 기마병 피해 {1}% 증가", at.site, actionAmount3);
+
                 actionCount3 = 10;
             }
 

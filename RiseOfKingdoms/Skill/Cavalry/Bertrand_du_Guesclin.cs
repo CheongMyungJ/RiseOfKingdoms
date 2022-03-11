@@ -16,16 +16,22 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 다음 3초간 일반공격시 100퍼확률로 고정피해 700계수, 분노 20깍
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[전의 고양] 다음 3초간 고정피해. 분노 20 감소", at.site);
             AddAfterSkillBonus(at, 1, 3, ActiveBonus);
-            actionAmount0 = 20;
-            df.rageMinus += actionAmount0;
+            
             at.isSkillUsed = true;
         }
         public void ActiveBonus(CommanderBase at, CommanderBase df)
         {
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 700);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@추가스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[전의 고양]", at.site);
+            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 700);
+
+            if (UsingLog.usingLog == true)
+                Console.WriteLine("- {0}[전의 고양] 대상 분노 20 감소", at.site);
+            actionAmount0 = 20;
+            df.rageMinus += actionAmount0;
         }
 
         public override void Passive1Before(CommanderBase at, CommanderBase df)
@@ -60,6 +66,8 @@ namespace RiseOfKingdoms.Skill
             {
                 if (actionCount2 == 10)
                 {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[파비우스 전략] 10초마다 기마병 피해 1% 증가(최대 5%)", at.site);
                     if (at.armyType == CommanderBase.ArmyType.Cavalry)
                     {
                         actionAmount2_2 += 1;
@@ -87,6 +95,8 @@ namespace RiseOfKingdoms.Skill
             if (at.normalAttackDamage > 0 && random.Next(0, 10) == 0 && actionCount3 <= 0)
             {
                 actionAmount3 = 250;
+                if (UsingLog.usingLog == true)
+                    Console.Write("- {0}[아이리스]", at.site);
                 CalcDamage.CalcHealingEffect(at, df, actionAmount3);
                 AddAfterSkillBonus(at, 0, 2, PassiveBonus);
                 actionCount3 = 5;
@@ -96,6 +106,8 @@ namespace RiseOfKingdoms.Skill
         }
         public void PassiveBonus(CommanderBase at, CommanderBase df)
         {
+            if (UsingLog.usingLog == true)
+                Console.Write("- {0}[아이리스]", at.site);
             CalcDamage.CalcHealingEffect(at, df, actionAmount3);
         }
 
@@ -107,6 +119,8 @@ namespace RiseOfKingdoms.Skill
             // 스피감 5퍼, 스킬피해받을때 대상부대에게 스킬피해 400계수. 5초에한번발동
             if (at.skillDamage > 0 && actionCountNew <= 0)
             {
+                if (UsingLog.usingLog == true)
+                    Console.Write("- {0}[왕실 사령관]", at.site);
                 CalcDamage.CalcActiveSkillDamage(at, df, 400);
                 actionCountNew = 5;
             }

@@ -12,7 +12,7 @@ namespace RiseOfKingdoms.Characteristic
     internal class CharacterBase : MethodBase
     {
         protected int Count = 0;
-        public void Init(CommanderBase at, int cnt) 
+        public override void Init(CommanderBase at, bool bl = true, int cnt = 0) 
         {
             Count = cnt;
             at.before_skill.Add(new DelegateMethod(BeforeAction));

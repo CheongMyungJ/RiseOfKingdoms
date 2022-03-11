@@ -16,17 +16,17 @@ namespace RiseOfKingdoms.Skill
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 75 계수 스킬
-            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 75);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[위협]", at.site);
+            extraDamage = CalcDamage.CalcActiveSkillDamage(at, df, 75);
             AddAfterSkillBonus(at, 1, 2, ActiveBonus);
         }
 
         public void ActiveBonus(CommanderBase at, CommanderBase df)
         {
-            CalcDamage.CalcAdditionalSkillDamage(df, extraDamage);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("@추가스킬시전 {0}", extraDamage);
+                Console.Write("- {0}[위협]", at.site);
+            CalcDamage.CalcAdditionalSkillDamage(df, extraDamage);
         }
 
         public override void Passive1Before(CommanderBase at, CommanderBase df)
