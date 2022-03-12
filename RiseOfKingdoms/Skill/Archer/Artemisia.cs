@@ -61,25 +61,33 @@ namespace RiseOfKingdoms.Skill
             }
         }
 
+        bool togle = true;
         public override void Passive3Before(CommanderBase at, CommanderBase df)
         {
             at.tempDamageIncrease += actionAmount3;
         }
         public override void Passive3After(CommanderBase at, CommanderBase df)
         {
+            if (at.isSkillUsed == true)
+                togle = true;
+
             // 분노 80퍼까지 증가하면 50퍼 확률로 3초 자체침묵, 모든피해 50퍼 증가 5초지속
             if (actionCount3 == 0)
                 actionAmount3 = 0;
 
             Random random = new Random();
-            if (at.rage >= at.maxRage * 0.8 && random.Next(0, 2) == 0 && actionCount3 <= 0)
+            if (at.rage >= at.maxRage * 0.8)
             {
-                if (UsingLog.usingLog == true)
-                    Console.WriteLine("- {0}[카리아 여왕] 대상 부대에 3초 침묵, 통솔부대 피해 50 증가 5초 지속", at.site);
-                if (at.silenceTurn <= 1)
-                    at.silenceTurn = 4;
-                actionAmount3 = 50;
-                actionCount3 = 5;
+                if (togle == true && random.Next(0, 2) == 0)
+                {
+                    if (UsingLog.usingLog == true)
+                        Console.WriteLine("- {0}[카리아 여왕] 대상 부대에 3초 침묵, 통솔부대 피해 50% 증가 5초 지속", at.site);
+                    if (at.silenceTurn <= 1)
+                        at.silenceTurn = 4;
+                    actionAmount3 = 50;
+                    actionCount3 = 5;
+                }
+                togle = false;
             }
             actionCount3--;
         }
@@ -103,7 +111,7 @@ namespace RiseOfKingdoms.Skill
                 AddAfterSkillBonus(at, 0, 2, NewBonus);
 
                 if (UsingLog.usingLog == true)
-                    Console.Write("- {0}[생존의 법칙] 대상 부대의 스킬피해 15% 증가. 3초 지속", at.site);
+                    Console.WriteLine("- {0}[생존의 법칙] 대상 부대의 스킬피해 15% 증가. 3초 지속", at.site);
                 actionAmountNew = 15;
                 actionCountNew = 3;
             }

@@ -35,7 +35,7 @@ namespace RiseOfKingdoms.Common
         }
         public enum IntegrationCharacter
         {
-            무리의부름, 전속돌격, 가득한화살통, 전원방패, 전원착검, None
+            무리의부름 = 1, 전속돌격, 가득한화살통, 전원방패, 전원착검, None
         }
         #endregion
         #region right
@@ -53,7 +53,7 @@ namespace RiseOfKingdoms.Common
         }
         public enum DefenceCharacter
         {
-            열혈, 병기공장인, 약초준비, 귀갑진형, 필사의애가, None
+            열혈 = 1, 병기공장인, 약초준비, 귀갑진형, 필사의애가, None
         }
         public enum MobilityCharacter
         {
@@ -67,11 +67,11 @@ namespace RiseOfKingdoms.Common
         }
         public enum GarrisonCharacter
         {
-            난공불락 = 1, 공성계, 철옹성, 사면초가, 왕궁호위대, 신의은혜, None
+            난공불락 = 1, 공성계, 철옹성, 왕궁호위대, 신의은혜, None
         }
         public enum VersatilityCharacter
         {
-            사면초가 = 1, 원형방패, 왕궁호위대, 축복의눈물, 운명의전환, None
+            왕궁호위대 = 1, 운명의전환, None
         }
         public enum PeacekeepingCharacter
         {
@@ -184,15 +184,11 @@ namespace RiseOfKingdoms.Common
             { GarrisonCharacter.난공불락, new Characteristic.Garrison.Impregnable() },
             { GarrisonCharacter.공성계, new Characteristic.Garrison.Empty_Fortress_Strategem() },
             { GarrisonCharacter.철옹성, new Characteristic.Garrison.Impenetrable_Fortifications() },
-            { GarrisonCharacter.사면초가, new Characteristic.Garrison.Nowhere_To_Turn() },
             { GarrisonCharacter.왕궁호위대, new Characteristic.Garrison.Kings_Guard() },
             { GarrisonCharacter.신의은혜, new Characteristic.Garrison.Divine_Favor() },
             { GarrisonCharacter.None, new CharacterBase() },
 
-            { VersatilityCharacter.사면초가, new Characteristic.Versatility.Nowhere_To_Turn() },
-            { VersatilityCharacter.원형방패, new Characteristic.Versatility.Buckler_Shield() },
             { VersatilityCharacter.왕궁호위대, new Characteristic.Versatility.Kings_Guard() },
-            { VersatilityCharacter.축복의눈물, new Characteristic.Versatility.Meteor_Shower() },
             { VersatilityCharacter.운명의전환, new Characteristic.Versatility.Turn_Of_Fate() },
             { VersatilityCharacter.None, new CharacterBase() },
 
@@ -283,15 +279,11 @@ namespace RiseOfKingdoms.Common
             { GarrisonCharacter.난공불락, new Characteristic.Garrison.Impregnable() },
             { GarrisonCharacter.공성계, new Characteristic.Garrison.Empty_Fortress_Strategem() },
             { GarrisonCharacter.철옹성, new Characteristic.Garrison.Impenetrable_Fortifications() },
-            { GarrisonCharacter.사면초가, new Characteristic.Garrison.Nowhere_To_Turn() },
             { GarrisonCharacter.왕궁호위대, new Characteristic.Garrison.Kings_Guard() },
             { GarrisonCharacter.신의은혜, new Characteristic.Garrison.Divine_Favor() },
             { GarrisonCharacter.None, new CharacterBase() },
 
-            { VersatilityCharacter.사면초가, new Characteristic.Versatility.Nowhere_To_Turn() },
-            { VersatilityCharacter.원형방패, new Characteristic.Versatility.Buckler_Shield() },
             { VersatilityCharacter.왕궁호위대, new Characteristic.Versatility.Kings_Guard() },
-            { VersatilityCharacter.축복의눈물, new Characteristic.Versatility.Meteor_Shower() },
             { VersatilityCharacter.운명의전환, new Characteristic.Versatility.Turn_Of_Fate() },
             { VersatilityCharacter.None, new CharacterBase() },
 
