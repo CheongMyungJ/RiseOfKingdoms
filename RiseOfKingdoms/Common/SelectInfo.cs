@@ -9,19 +9,20 @@ using static RiseOfKingdoms.Common.Character;
 using static RiseOfKingdoms.Common.Commanders;
 using static RiseOfKingdoms.Common.Equipment;
 using static RiseOfKingdoms.Common.Tiers;
+using System.IO;
 
 namespace RiseOfKingdoms.Common
 {
     internal static class SelectInfo
     {
-        public static void SetIsField(CommanderBase commander)
+        public static void SetIsField(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 Console.WriteLine("1. 필드");
                 Console.WriteLine("2. 집결");
                 Console.WriteLine("3. 수성");
-                string numString = Console.ReadLine();
+                string numString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 int num = int.Parse(numString);
                 if (num != 1 && num != 2 && num != 3)
                 {
@@ -37,7 +38,7 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetCommander(CommanderBase commander, bool isFirst, bool isAttacker)
+        public static void SetCommander(CommanderBase commander, bool isFirst, bool isAttacker, StreamReader sr)
         {
             while (true)
             {
@@ -45,7 +46,7 @@ namespace RiseOfKingdoms.Common
                 {
                     Console.WriteLine((int)data + ". " + data);
                 }
-                string commanderNum = Console.ReadLine();
+                string commanderNum = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (Enum.IsDefined(typeof(CommanderList), int.Parse(commanderNum)) == false)
                 {
                     Console.WriteLine("정확한 번호를 입력해주세요.");
@@ -72,7 +73,7 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetTroopType(CommanderBase commander, bool isAttacker)
+        public static void SetTroopType(CommanderBase commander, bool isAttacker, StreamReader sr)
         {
             while (true)
             {
@@ -80,7 +81,7 @@ namespace RiseOfKingdoms.Common
                 {
                     Console.WriteLine((int)data + ". " + data);
                 }
-                string tier = Console.ReadLine();
+                string tier = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (Enum.IsDefined(typeof(TierList), int.Parse(tier)) == false)
                 {
                     Console.WriteLine("정확한 번호를 입력해주세요.");
@@ -98,12 +99,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetTroopAmount(CommanderBase commander)
+        public static void SetTroopAmount(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 int stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (int.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -118,12 +119,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalAttack(CommanderBase commander)
+        public static void SetAdditionalAttack(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -137,12 +138,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalDefence(CommanderBase commander)
+        public static void SetAdditionalDefence(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -156,12 +157,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalHealth(CommanderBase commander)
+        public static void SetAdditionalHealth(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -176,13 +177,12 @@ namespace RiseOfKingdoms.Common
             }
         }
 
-
-        public static void SetAdditionalDamageIncrease(CommanderBase commander)
+        public static void SetAdditionalDamageIncrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -196,12 +196,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalNormalDamageIncrease(CommanderBase commander)
+        public static void SetAdditionalNormalDamageIncrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -215,12 +215,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalCounterDamageIncrease(CommanderBase commander)
+        public static void SetAdditionalCounterDamageIncrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -234,12 +234,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalSkillDamageIncrease(CommanderBase commander)
+        public static void SetAdditionalSkillDamageIncrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -253,13 +253,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-
-        public static void SetAdditionalDamageDecrease(CommanderBase commander)
+        public static void SetAdditionalDamageDecrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -273,12 +272,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalNormalDamageDecrease(CommanderBase commander)
+        public static void SetAdditionalNormalDamageDecrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -292,12 +291,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalCounterDamageDecrease(CommanderBase commander)
+        public static void SetAdditionalCounterDamageDecrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -311,12 +310,12 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-        public static void SetAdditionalSkillDamageDecrease(CommanderBase commander)
+        public static void SetAdditionalSkillDamageDecrease(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
                 double stat;
-                string statString = Console.ReadLine();
+                string statString = (sr == null? Console.ReadLine() : sr.ReadLine());
                 if (double.TryParse(statString, out stat) == false)
                 {
                     Console.WriteLine("정확한 숫자를 입력해주세요.");
@@ -330,9 +329,28 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
+        public static void SetAdditionalHealingEffect(CommanderBase commander, StreamReader sr)
+        {
+            while (true)
+            {
+                double stat;
+                string statString = (sr == null ? Console.ReadLine() : sr.ReadLine());
+                if (double.TryParse(statString, out stat) == false)
+                {
+                    Console.WriteLine("정확한 숫자를 입력해주세요.");
+                }
+                else
+                {
+                    Console.WriteLine("입력하신 치료효과증가는 {0} 입니다.", stat);
+                    Console.WriteLine();
+                    commander.additionalHealingEffect += stat;
+                    break;
+                }
+            }
+        }
 
 
-        public static void SetCharacter(CommanderBase commander)
+        public static void SetCharacter(CommanderBase commander, StreamReader sr)
         {
             while (true)
             {
@@ -340,7 +358,10 @@ namespace RiseOfKingdoms.Common
                 {
                     Console.WriteLine((int)data + ". " + data);
                 }
-                string st = Console.ReadLine();
+                string st = (sr == null? Console.ReadLine() : sr.ReadLine());
+                if (string.IsNullOrEmpty(st))
+                    return;
+
                 st = st.Replace(" ", "");
                 string[] stList = st.Split(',');
                 if (stList.Length != 3)
@@ -373,8 +394,7 @@ namespace RiseOfKingdoms.Common
                 }
             }
         }
-
-        public static void SetSubCharacter(CommanderBase commander, bool isAttacker)
+        public static void SetSubCharacter(CommanderBase commander, bool isAttacker, StreamReader sr)
         {
             while (true)
             {
@@ -385,8 +405,12 @@ namespace RiseOfKingdoms.Common
                     {
                         Console.WriteLine((int)data + ". " + data);
                     }
-                    string st = Console.ReadLine();
+                    string st = (sr == null? Console.ReadLine() : sr.ReadLine());
+                    if (string.IsNullOrEmpty(st))
+                        return;
+
                     st = st.Replace(" ", "");
+                    
                     string[] stList = st.Split(',');
                     foreach (string ch in stList)
                     {
@@ -415,8 +439,7 @@ namespace RiseOfKingdoms.Common
                 break;
             }
         }
-
-        public static void SetEquipment(CommanderBase commander, bool isAttacker)
+        public static void SetEquipment(CommanderBase commander, bool isAttacker, StreamReader sr)
         {
             while (true)
             {
@@ -424,7 +447,7 @@ namespace RiseOfKingdoms.Common
                 {
                     Console.WriteLine((int)data + ". " + data);
                 }
-                string st = Console.ReadLine();
+                string st = (sr == null? Console.ReadLine() : sr.ReadLine());
                 st = st.Replace(" ", "");
                 string[] stList = st.Split(',');
                 foreach (string ch in stList)
@@ -455,11 +478,11 @@ namespace RiseOfKingdoms.Common
             }
         }
 
-        public static void SetRunType(CommanderBase at, CommanderBase df)
+        public static void SetRunType(CommanderBase at, CommanderBase df, StreamReader sr)
         {
             while (true)
             {
-                string numString = Console.ReadLine();
+                string numString = (sr == null ? Console.ReadLine() : sr.ReadLine());
                 int num = 0;
                 if (int.TryParse(numString, out num) == false || (num < 1 || num > 100000))
                 {
@@ -478,9 +501,184 @@ namespace RiseOfKingdoms.Common
                         UsingLog.usingLog = false;
                         Main.RepeatRun(at, df, num);
                     }
-                        
+
                     break;
                 }
+            }
+        }
+
+        public static void DirectSetting(string txtName)
+        {
+            StreamReader sr = string.IsNullOrEmpty(txtName)? null : new StreamReader(txtName);
+
+            CommanderBase commander_at = new CommanderBase();
+            CommanderBase commander_df = new CommanderBase();
+
+            Console.WriteLine("▶ 공격측 정보 입력.");
+            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            SetIsField(commander_at, sr);
+            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            SetCommander(commander_at, true, true, sr);
+            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            SetCommander(commander_at, false, true, sr);
+            Console.WriteLine("- 병종을 선택해 주세요");
+            SetTroopType(commander_at, true, sr);
+            Console.WriteLine("- 부대수를 입력해 주세요");
+            SetTroopAmount(commander_at, sr);
+            Console.WriteLine("- 추가 스탯 입력. [부대창설-상세]에 표시되는 부대버프를 입력해주세요.");
+            Console.WriteLine("- 표시되는 [공격력](%)을 입력해주세요");
+            SetAdditionalAttack(commander_at, sr);
+            Console.WriteLine("- 표시되는 [방어력](%)을 입력해주세요");
+            SetAdditionalDefence(commander_at, sr);
+            Console.WriteLine("- 표시되는 [생명력](%)을 입력해주세요");
+            SetAdditionalHealth(commander_at, sr);
+            Console.WriteLine("- 표시되는 [모든피해증가](%)을 입력해주세요");
+            SetAdditionalDamageIncrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [일반피해증가](%)을 입력해주세요");
+            SetAdditionalNormalDamageIncrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [반격피해증가](%)을 입력해주세요");
+            SetAdditionalCounterDamageIncrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [스킬피해증가](%)을 입력해주세요");
+            SetAdditionalSkillDamageIncrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [모든피해감소](%)을 입력해주세요");
+            SetAdditionalDamageDecrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [일반피해감소](%)을 입력해주세요");
+            SetAdditionalNormalDamageDecrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [반격피해감소](%)을 입력해주세요");
+            SetAdditionalCounterDamageDecrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [스킬피해감소](%)을 입력해주세요");
+            SetAdditionalSkillDamageDecrease(commander_at, sr);
+            Console.WriteLine("- 표시되는 [치료효과증가](%)을 입력해주세요");
+            SetAdditionalHealingEffect(commander_at, sr);
+            Console.WriteLine("- 세 종류의 특성을 선택해주세요. ex) 1,6,11");
+            SetCharacter(commander_at, sr);
+            Console.WriteLine("- 각 특성 별 상세특성 정보를 입력해주세요. 단, 일부 특성은 버프에 이미 반영되어 있습니다.");
+            SetSubCharacter(commander_at, true, sr);
+            Console.WriteLine("- 착용한 악세서리를 두 개 선택해주세요. 단, 일부 악세서리는 버프에 이미 반영되어 있습니다. ex) 1,2");
+            SetEquipment(commander_at, true, sr);
+
+            Console.WriteLine("▶ 수비측 정보 입력.");
+            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            SetIsField(commander_df, sr);
+            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            SetCommander(commander_df, true, false, sr);
+            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            SetCommander(commander_df, false, false, sr);
+            Console.WriteLine("- 병종을 선택해 주세요");
+            SetTroopType(commander_df, false, sr);
+            Console.WriteLine("- 부대수를 입력해 주세요");
+            SetTroopAmount(commander_df, sr);
+            Console.WriteLine("- 추가 스탯 입력. [부대창설-상세]에 표시되는 부대버프를 입력해주세요.");
+            Console.WriteLine("- 표시되는 [공격력](%)을 입력해주세요");
+            SetAdditionalAttack(commander_df, sr);
+            Console.WriteLine("- 표시되는 [방어력](%)을 입력해주세요");
+            SetAdditionalDefence(commander_df, sr);
+            Console.WriteLine("- 표시되는 [생명력](%)을 입력해주세요");
+            SetAdditionalHealth(commander_df, sr);
+            Console.WriteLine("- 표시되는 [모든피해증가](%)을 입력해주세요");
+            SetAdditionalDamageIncrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [일반피해증가](%)을 입력해주세요");
+            SetAdditionalNormalDamageIncrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [반격피해증가](%)을 입력해주세요");
+            SetAdditionalCounterDamageIncrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [스킬피해증가](%)을 입력해주세요");
+            SetAdditionalSkillDamageIncrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [모든피해감소](%)을 입력해주세요");
+            SetAdditionalDamageDecrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [일반피해감소](%)을 입력해주세요");
+            SetAdditionalNormalDamageDecrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [반격피해감소](%)을 입력해주세요");
+            SetAdditionalCounterDamageDecrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [스킬피해감소](%)을 입력해주세요");
+            SetAdditionalSkillDamageDecrease(commander_df, sr);
+            Console.WriteLine("- 표시되는 [치료효과증가](%)을 입력해주세요");
+            SetAdditionalHealingEffect(commander_df, sr);
+            Console.WriteLine("- 세 종류의 특성을 선택해주세요. ex) 1,6,11");
+            SetCharacter(commander_df, sr);
+            Console.WriteLine("- 각 특성 별 상세특성 정보를 입력해주세요. 단, 일부 특성은 버프에 이미 반영되어 있습니다.");
+            SetSubCharacter(commander_df, false, sr);
+            Console.WriteLine("- 착용한 악세서리를 두 개 선택해주세요. 단, 일부 악세서리는 버프에 이미 반영되어 있습니다. ex) 1,2");
+            SetEquipment(commander_df, false, sr);
+
+            ViewBuff.ViewAdditionalBuff(commander_at, commander_df);
+
+            Console.WriteLine("- 반복횟수를 입력해주세요(Max 100000). 1 입력 시 전투로그 확인 가능.");
+            SetRunType(commander_at, commander_df, sr);
+
+            Console.WriteLine("아무 키나 눌러 종료하세요.");
+            string st = Console.ReadLine();
+
+        }
+
+        public static void IndirectSetting()
+        {
+            StreamReader sr = null;
+
+            CommanderBase commander_at = new CommanderBase();
+            CommanderBase commander_df = new CommanderBase();
+
+            Console.WriteLine("▶ 공격측 정보 입력.");
+            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            SetIsField(commander_at, sr);
+            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            SetCommander(commander_at, true, true, sr);
+            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            SetCommander(commander_at, false, true, sr);
+            Console.WriteLine("- 병종을 선택해 주세요");
+            SetTroopType(commander_at, true, sr);
+            Console.WriteLine("- 부대수를 입력해 주세요");
+            SetTroopAmount(commander_at, sr);
+            Console.WriteLine("- 누적할 샘플데이터 파일명을 입력하세요. 그만하려면 0 입력.");
+            SetSampleData(commander_at, true, sr);
+            Console.WriteLine("- 착용한 악세서리를 두 개 선택해주세요. 단, 일부 악세서리는 버프에 이미 반영되어 있습니다. ex) 1,2");
+            SetEquipment(commander_at, true, sr);
+
+            Console.WriteLine("▶ 수비측 정보 입력.");
+            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            SetIsField(commander_df, sr);
+            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            SetCommander(commander_df, true, false, sr);
+            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            SetCommander(commander_df, false, false, sr);
+            Console.WriteLine("- 병종을 선택해 주세요");
+            SetTroopType(commander_df, false, sr);
+            Console.WriteLine("- 부대수를 입력해 주세요");
+            SetTroopAmount(commander_df, sr);
+            Console.WriteLine("- 누적할 샘플데이터 파일명을 입력하세요. 그만하려면 0 입력.");
+            SetSampleData(commander_df, false, sr);
+            Console.WriteLine("- 착용한 악세서리를 두 개 선택해주세요. 단, 일부 악세서리는 버프에 이미 반영되어 있습니다. ex) 1,2");
+            SetEquipment(commander_df, false, sr);
+
+            ViewBuff.ViewAdditionalBuff(commander_at, commander_df);
+
+            Console.WriteLine("- 반복횟수를 입력해주세요(Max 100000). 1 입력 시 전투로그 확인 가능.");
+            SetRunType(commander_at, commander_df, sr);
+
+            Console.WriteLine("아무 키나 눌러 종료하세요.");
+            string st = Console.ReadLine();
+        }
+
+        public static void SetSampleData(CommanderBase commander, bool isAttacker, StreamReader sr)
+        {
+            string fName = String.Empty;
+            while ((fName = (sr == null ? Console.ReadLine() : sr.ReadLine())) != "0")
+            {
+                string path = Directory.GetFiles(@"C:\Users\jcm\Desktop\git\RiseOfKingdoms\RiseOfKingdoms\SampleData", fName, SearchOption.AllDirectories).FirstOrDefault();
+                StreamReader sr2 = new StreamReader(path);
+                SetAdditionalAttack(commander, sr2);
+                SetAdditionalDefence(commander, sr2);
+                SetAdditionalHealth(commander, sr2);
+                SetAdditionalDamageIncrease(commander, sr2);
+                SetAdditionalNormalDamageIncrease(commander, sr2);
+                SetAdditionalCounterDamageIncrease(commander, sr2);
+                SetAdditionalSkillDamageIncrease(commander, sr2);
+                SetAdditionalDamageDecrease(commander, sr2);
+                SetAdditionalNormalDamageDecrease(commander, sr2);
+                SetAdditionalCounterDamageDecrease(commander, sr2);
+                SetAdditionalSkillDamageDecrease(commander, sr2);
+                SetAdditionalHealingEffect(commander, sr2);
+                SetCharacter(commander, sr2);
+                SetSubCharacter(commander, isAttacker, sr2);
             }
         }
     }

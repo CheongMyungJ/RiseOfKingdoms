@@ -101,7 +101,7 @@ namespace RiseOfKingdoms.Calculate
             double heal = factor
                 * Math.Sqrt(at.troop)
                 * at.baseAttack
-                * ((100 + at.additionalHealingEffect + at.tempHealingEffect) / 100.0)
+                * ((100 + at.additionalHealingEffect + at.tempHealingEffect + at.activeHealingEffect_bf - at.activeHealingEffect_dbf) / 100.0)
                 / (at.baseDefence * at.baseHealth);
 
             at.heal += heal;

@@ -15,14 +15,12 @@ namespace RiseOfKingdoms.Skill
         public override void ActiveBefore(CommanderBase at, CommanderBase df)
         {
             df.tempSkillDamageIncreaseCancel = actionBool;
-            df.tempSpeedIncrease -= actionAmount0;
 
             actionCount0--;
 
             if (actionCount0 == 0)
             {
                 actionBool = false;
-                actionAmount0 = 0;
             }
         }
 
@@ -39,9 +37,25 @@ namespace RiseOfKingdoms.Skill
 
             if (UsingLog.usingLog == true)
                 Console.WriteLine("- {0}[혈통의 비밀] 대상 부대 스킬피해 증가 버프 금지 행군속도 30% 감소. 3초 지속", at.site);
+            AddBeforeSkillBonus(at, 3, ActiveBonusStart, ActiveBonusEnd);
             actionBool = true;
-            actionAmount0 = 30;
             actionCount0 = 3;
+        }
+
+        public void ActiveBonusStart(CommanderBase at, CommanderBase df)
+        {
+            if (df.activeSpeedIncrease_dbf < 30)
+            {
+                df.activeSpeedIncrease_dbf = 30;
+            }
+        }
+
+        public void ActiveBonusEnd(CommanderBase at, CommanderBase df)
+        {
+            if (df.activeSpeedIncrease_dbf == 30)
+            {
+                df.activeSpeedIncrease_dbf = 0;
+            }
         }
 
 

@@ -21,7 +21,6 @@ namespace RiseOfKingdoms.Skill
                 bs.maxRage -= 50;
         }
 
-        double extraDamage;
         bool togle = true;
         public override void Active(CommanderBase at, CommanderBase df)
         {
@@ -41,7 +40,7 @@ namespace RiseOfKingdoms.Skill
 
         public void ActiveBonusStart(CommanderBase at, CommanderBase df)
         {
-            if (df.activeDefence_dbf <= 30)
+            if (df.activeDefence_dbf < 30)
             {
                 df.activeDefence_dbf = 30;
             }

@@ -13,11 +13,6 @@ namespace RiseOfKingdoms.Skill
     {
         public override void ActiveBefore(CommanderBase at, CommanderBase df)
         {
-            df.tempSpeedIncrease -= actionAmount0;
-
-            actionCount0--;
-            if (actionCount0 == 0)
-                actionAmount0 = 0;
         }
 
         double extraDamage;
@@ -35,9 +30,22 @@ namespace RiseOfKingdoms.Skill
 
             if (UsingLog.usingLog == true)
                 Console.WriteLine("- {0}[충무공] 대상 부대 행군속도 30% 감소. 3초 지속", at.site);
+            AddBeforeSkillBonus(at, 3, ActiveBonusStart, ActiveBonusEnd);
+        }
+        public void ActiveBonusStart(CommanderBase at, CommanderBase df)
+        {
+            if (df.activeSpeedIncrease_dbf < 30)
+            {
+                df.activeSpeedIncrease_dbf = 30;
+            }
+        }
 
-            actionAmount0 = 30;
-            actionCount0 = 3;
+        public void ActiveBonusEnd(CommanderBase at, CommanderBase df)
+        {
+            if (df.activeSpeedIncrease_dbf == 30)
+            {
+                df.activeSpeedIncrease_dbf = 0;
+            }
         }
 
 

@@ -11,16 +11,6 @@ namespace RiseOfKingdoms.Skill
 {
     internal class Amanitore : SkillBase
     {
-        public override void ActiveBefore(CommanderBase at, CommanderBase df)
-        {
-            at.tempDamageIncrease += actionAmount0;
-
-            actionCount0--;
-            if (actionCount0 == 0)
-                actionAmount0 = 0;
-        }
-
-        
         public override void Active(CommanderBase at, CommanderBase df)
         {
             // 피해계수 1300, 통솔부대 피해 20퍼 증가 3초지속
@@ -32,8 +22,23 @@ namespace RiseOfKingdoms.Skill
 
             if (UsingLog.usingLog == true)
                 Console.WriteLine("- {0}[영광의 화살] 통솔부대 모든 피해 20% 증가 3초 지속", at.site);
-            actionAmount0 = 20;
-            actionCount0 = 3;
+            AddBeforeSkillBonus(at, 3, ActiveBonusStart, ActiveBonusEnd);
+        }
+
+        public void ActiveBonusStart(CommanderBase at, CommanderBase df)
+        {
+            if (at.activeDamageIncrease_bf < 20)
+            {
+                at.activeDamageIncrease_bf = 20;
+            }
+        }
+
+        public void ActiveBonusEnd(CommanderBase at, CommanderBase df)
+        {
+            if (at.activeDamageIncrease_bf == 20)
+            {
+                at.activeDamageIncrease_bf = 0;
+            }
         }
 
 

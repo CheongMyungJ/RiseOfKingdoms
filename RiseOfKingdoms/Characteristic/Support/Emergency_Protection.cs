@@ -25,7 +25,7 @@ namespace RiseOfKingdoms.Characteristic.Support
             {
                 actionAmount = (5 * Count);
                 if (UsingLog.usingLog == true)
-                    Console.WriteLine("- {0}[긴급방어] 스킬피해 {1}% 감소", at.site, actionAmount);
+                    Console.WriteLine("- {0}[긴급방어] 스킬피해 {1}% 감소. 3초 지속", at.site, actionAmount);
                 actionCount = 3;
             }
             actionCount--;

@@ -105,6 +105,8 @@ namespace RiseOfKingdoms.Commander
         public double activeCounterDamageDecrease_dbf = 0;
         public double activeSpeedIncrease_bf = 0;
         public double activeSpeedIncrease_dbf = 0;
+        public double activeHealingEffect_bf = 0;
+        public double activeHealingEffect_dbf = 0;
 
         public List<DelegateMethod> before_skill;
         public List<DelegateMethod> after_skill;
