@@ -119,12 +119,12 @@ namespace RiseOfKingdoms.Common
             // 공격측 데미지 처리
             if (at.shield >= at.normalAttackDamage + at.counterAttackDamage + at.skillDamage)
             {
-                at.shield -= at.normalAttackDamage + at.counterAttackDamage + at.skillDamage;
+                at.shield -= at.normalAttackDamage + at.counterAttackDamage + at.skillDamage + at.additionalSkillDamage;
                 at.troop = at.troop + Math.Round(at.heal);
             }
             else
             {
-                at.troop = at.troop - Math.Round(at.normalAttackDamage) - Math.Round(at.counterAttackDamage) - Math.Round(at.skillDamage) + Math.Round(at.shield) + Math.Round(at.heal);
+                at.troop = at.troop - Math.Round(at.normalAttackDamage) - Math.Round(at.counterAttackDamage) - Math.Round(at.skillDamage) - Math.Round(at.additionalSkillDamage) + Math.Round(at.shield) + Math.Round(at.heal);
                 at.shield = 0;
             }
             // 공격측 분노 처리
@@ -133,12 +133,12 @@ namespace RiseOfKingdoms.Common
             // 수비측 데미지 처리
             if (df.shield >= df.normalAttackDamage + df.counterAttackDamage + df.skillDamage)
             {
-                df.shield -= df.normalAttackDamage + df.counterAttackDamage + df.skillDamage;
+                df.shield -= df.normalAttackDamage + df.counterAttackDamage + df.skillDamage + at.additionalSkillDamage;
                 df.troop = df.troop + Math.Round(df.heal);
             }
             else
             {
-                df.troop = df.troop - Math.Round(df.normalAttackDamage) - Math.Round(df.counterAttackDamage) - Math.Round(df.skillDamage) + Math.Round(df.shield) + Math.Round(df.heal);
+                df.troop = df.troop - Math.Round(df.normalAttackDamage) - Math.Round(df.counterAttackDamage) - Math.Round(df.skillDamage) - Math.Round(df.additionalSkillDamage) + Math.Round(df.shield) + Math.Round(df.heal);
                 df.shield = 0;
             }
             // 수비측 분노 처리

@@ -54,7 +54,7 @@ namespace RiseOfKingdoms.Calculate
         }
         public static void CalcAdditionalSkillDamage(CommanderBase df, double damage)
         {
-            df.skillDamage += damage;
+            df.additionalSkillDamage += damage;
             if (UsingLog.usingLog == true)
                 Console.WriteLine(" 스킬데미지 : {0}", damage);
         }
@@ -107,6 +107,13 @@ namespace RiseOfKingdoms.Calculate
             at.heal += heal;
             if (UsingLog.usingLog == true)
                 Console.WriteLine(" 치료량 : {0}", heal);
+
+            if (at.thirstForBloodTurn > 0)
+            {
+                if (UsingLog.usingLog == true)
+                    Console.Write("- {0}[피의갈증]", df.site);
+                CalcActiveSkillDamage(df, at, at.thirstForBloodFactor);
+            }
 
             return heal;
         }

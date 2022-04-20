@@ -36,10 +36,10 @@ namespace RiseOfKingdoms.Common
         {
             for (int i = 0; i < dummyCnt + cnt; i++)
             {
-                if (at.before_skill_bonus_list.Count <= i)
-                    at.before_skill_bonus_list.Add(new List<DelegateMethod>() { (i < dummyCnt ? Dummy : method) });
+                if (at.active_skill_bonus_list.Count <= i)
+                    at.active_skill_bonus_list.Add(new List<DelegateMethod>() { (i < dummyCnt ? Dummy : method) });
                 else
-                    at.before_skill_bonus_list[i].Add((i < dummyCnt ? Dummy : method));
+                    at.active_skill_bonus_list[i].Add((i < dummyCnt ? Dummy : method));
             }
         }
     }

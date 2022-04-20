@@ -16,8 +16,6 @@ namespace RiseOfKingdoms.Skill
             at.tempHealth += actionAmount0;
  
             actionCount0--;
-            if (actionCount0 == 1)
-                actionAmount0 *= 2;
             if (actionCount0 == 0)
                 actionAmount0 = 0;
         }
@@ -33,7 +31,7 @@ namespace RiseOfKingdoms.Skill
             at.isSkillUsed = true;
             AddAfterSkillBonus(at, 1, 1, ActiveBonus);
             if (UsingLog.usingLog == true)
-                Console.WriteLine("- {0}[팔미라 여왕] 치료된 부대 생명력 지속적으로 50% 증가 모든 피해 30% 증가. 2초 지속", at.site);
+                Console.WriteLine("- {0}[팔미라 여왕] 치료된 부대 생명력 50% 증가 모든 피해 30% 증가. 2초 지속", at.site);
 
             AddBeforeSkillBonus(at, 2, ActiveBonusStart, ActiveBonusEnd);
 
@@ -97,8 +95,9 @@ namespace RiseOfKingdoms.Skill
         }
         public override void Passive3After(CommanderBase at, CommanderBase df)
         {
+            Random random = new Random();
             // 주둔중 공격시 10퍼확률로 대상부대에게 초당피해(600계수)3초지속 5초에한번발동
-            if (at.battleState == CommanderBase.BattleState.Garrison && df.normalAttackDamage > 0 && actionCount3 <= 0)
+            if (random.Next(0,10) == 0 && at.battleState == CommanderBase.BattleState.Garrison && df.normalAttackDamage > 0 && actionCount3 <= 0)
             {
                 actionAmount3 = 600;
                 if (UsingLog.usingLog == true)

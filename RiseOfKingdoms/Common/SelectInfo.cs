@@ -21,21 +21,31 @@ namespace RiseOfKingdoms.Common
             {
                 Console.WriteLine("1. 필드");
                 Console.WriteLine("2. 집결");
-                Console.WriteLine("3. 수성");
-                string numString = (sr == null? Console.ReadLine() : sr.ReadLine());
-                int num = int.Parse(numString);
-                if (num != 1 && num != 2 && num != 3)
+                Console.WriteLine("3. 주둔");
+                string str = (sr == null ? Console.ReadLine() : sr.ReadLine());
+                int num;
+                if (int.TryParse(str, out num) == true)
                 {
-                    Console.WriteLine("정확한 번호를 입력해주세요.");
+                    if (num != 1 && num != 2 && num != 3)
+                    {
+                        Console.WriteLine("정확한 번호를 입력해주세요.");
+                        continue;
+                    }
                 }
                 else
                 {
-                    Console.WriteLine("{0}을(를) 선택하셨습니다.", num == 1? "필드":(num == 2? "집결":"수성"));
-                    Console.WriteLine();
-                    BattleState battleState = (num == 1 ? BattleState.Field : (num == 2? BattleState.Conquering : BattleState.Garrison));
-                    commander.battleState = battleState;
-                    break;
+                    if (str != "필드" && str != "집결" && str != "주둔")
+                    {
+                        Console.WriteLine("정확한 이름을 입력해주세요.");
+                        continue;
+                    }
                 }
+                Console.WriteLine("{0}을(를) 선택하셨습니다.", num == 0? str : num == 1? "필드":(num == 2? "집결":"주둔"));
+                Console.WriteLine();
+                BattleState battleState = (num == 0? (str == "필드"? BattleState.Field : (str == "집결"? BattleState.Conquering : BattleState.Garrison)) :(num == 1 ? BattleState.Field : (num == 2 ? BattleState.Conquering : BattleState.Garrison)));
+                commander.battleState = battleState;
+                break;
+                
             }
         }
         public static void SetCommander(CommanderBase commander, bool isFirst, bool isAttacker, StreamReader sr)
@@ -46,31 +56,41 @@ namespace RiseOfKingdoms.Common
                 {
                     Console.WriteLine((int)data + ". " + data);
                 }
-                string commanderNum = (sr == null? Console.ReadLine() : sr.ReadLine());
-                if (Enum.IsDefined(typeof(CommanderList), int.Parse(commanderNum)) == false)
+                string str = (sr == null? Console.ReadLine() : sr.ReadLine());
+                int num;
+                if (int.TryParse(str, out num) == true)
                 {
-                    Console.WriteLine("정확한 번호를 입력해주세요.");
+                    if (Enum.IsDefined(typeof(CommanderList), num) == false)
+                    {
+                        Console.WriteLine("정확한 번호를 입력해주세요.");
+                        continue;
+                    }
                 }
                 else
                 {
-                    var enumCommander = Enum.Parse(typeof(CommanderList), commanderNum);
-                    Console.WriteLine("선택하신 사령관은 {0} 입니다.", Enum.GetName(typeof(CommanderList), int.Parse(commanderNum)));
-                    Console.WriteLine();
-
-                    if (isAttacker)
+                    if (Enum.IsDefined(typeof(CommanderList), str) == false)
                     {
-                        commander.site = "공격측";
-                        Commanders.atkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
-                        commander.commanderClassList.Add((Commanders.atkeyValuePairs[(CommanderList)enumCommander], isFirst));
+                        Console.WriteLine("정확한 이름을 입력해주세요.");
+                        continue;
                     }
-                    else
-                    {
-                        commander.site = "수비측";
-                        Commanders.dfkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
-                        commander.commanderClassList.Add((Commanders.dfkeyValuePairs[(CommanderList)enumCommander], isFirst));
-                    }
-                    break;
                 }
+                var enumCommander = Enum.Parse(typeof(CommanderList), str);
+                Console.WriteLine("선택하신 사령관은 {0} 입니다.", num == 0? str : Enum.GetName(typeof(CommanderList), num));
+                Console.WriteLine();
+
+                if (isAttacker)
+                {
+                    commander.site = "공격측";
+                    Commanders.atkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
+                    commander.commanderClassList.Add((Commanders.atkeyValuePairs[(CommanderList)enumCommander], isFirst));
+                }
+                else
+                {
+                    commander.site = "수비측";
+                    Commanders.dfkeyValuePairs[(CommanderList)enumCommander].Init(commander, isFirst);
+                    commander.commanderClassList.Add((Commanders.dfkeyValuePairs[(CommanderList)enumCommander], isFirst));
+                }
+                break;
             }
         }
         public static void SetTroopType(CommanderBase commander, bool isAttacker, StreamReader sr)
@@ -81,22 +101,32 @@ namespace RiseOfKingdoms.Common
                 {
                     Console.WriteLine((int)data + ". " + data);
                 }
-                string tier = (sr == null? Console.ReadLine() : sr.ReadLine());
-                if (Enum.IsDefined(typeof(TierList), int.Parse(tier)) == false)
+                string str = (sr == null ? Console.ReadLine() : sr.ReadLine());
+                int num;
+                if (int.TryParse(str, out num) == true)
                 {
-                    Console.WriteLine("정확한 번호를 입력해주세요.");
+                    if (Enum.IsDefined(typeof(TierList), num) == false)
+                    {
+                        Console.WriteLine("정확한 번호를 입력해주세요.");
+                        continue;
+                    }
                 }
                 else
                 {
-                    var enumTier = Enum.Parse(typeof(CommanderList), tier);
-                    Console.WriteLine("선택하신 병종은 {0} 입니다.", Enum.GetName(typeof(TierList), int.Parse(tier)));
-                    Console.WriteLine();
-                    if (isAttacker)
-                        Tiers.atkeyValuePairs[(TierList)enumTier].Init(commander);
-                    else
-                        Tiers.dfkeyValuePairs[(TierList)enumTier].Init(commander);
-                    break;
+                    if (Enum.IsDefined(typeof(TierList), str) == false)
+                    {
+                        Console.WriteLine("정확한 이름을 입력해주세요.");
+                        continue;
+                    }
                 }
+                var enumTier = Enum.Parse(typeof(TierList), str);
+                Console.WriteLine("선택하신 병종은 {0} 입니다.", num == 0 ? str : Enum.GetName(typeof(TierList), num));
+                Console.WriteLine();
+                if (isAttacker)
+                    Tiers.atkeyValuePairs[(TierList)enumTier].Init(commander);
+                else
+                    Tiers.dfkeyValuePairs[(TierList)enumTier].Init(commander);
+                break;
             }
         }
         public static void SetTroopAmount(CommanderBase commander, StreamReader sr)
@@ -515,13 +545,13 @@ namespace RiseOfKingdoms.Common
             CommanderBase commander_df = new CommanderBase();
 
             Console.WriteLine("▶ 공격측 정보 입력.");
-            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            Console.WriteLine("- 전투 타입 번호 혹은 이름을 선택하세요.");
             SetIsField(commander_at, sr);
-            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            Console.WriteLine("- 주사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_at, true, true, sr);
-            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            Console.WriteLine("- 부사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_at, false, true, sr);
-            Console.WriteLine("- 병종을 선택해 주세요");
+            Console.WriteLine("- 병종 번호 혹은 이름을 선택해 주세요");
             SetTroopType(commander_at, true, sr);
             Console.WriteLine("- 부대수를 입력해 주세요");
             SetTroopAmount(commander_at, sr);
@@ -558,13 +588,13 @@ namespace RiseOfKingdoms.Common
             SetEquipment(commander_at, true, sr);
 
             Console.WriteLine("▶ 수비측 정보 입력.");
-            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            Console.WriteLine("- 전투 타입 번호 혹은 이름을 선택하세요.");
             SetIsField(commander_df, sr);
-            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            Console.WriteLine("- 주사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_df, true, false, sr);
-            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            Console.WriteLine("- 부사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_df, false, false, sr);
-            Console.WriteLine("- 병종을 선택해 주세요");
+            Console.WriteLine("- 병종 번호 혹은 이름을 선택해 주세요");
             SetTroopType(commander_df, false, sr);
             Console.WriteLine("- 부대수를 입력해 주세요");
             SetTroopAmount(commander_df, sr);
@@ -618,11 +648,11 @@ namespace RiseOfKingdoms.Common
             CommanderBase commander_df = new CommanderBase();
 
             Console.WriteLine("▶ 공격측 정보 입력.");
-            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            Console.WriteLine("- 전투 타입 번호 혹은 이름을 선택하세요.");
             SetIsField(commander_at, sr);
-            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            Console.WriteLine("- 주사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_at, true, true, sr);
-            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            Console.WriteLine("- 부사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_at, false, true, sr);
             Console.WriteLine("- 병종을 선택해 주세요");
             SetTroopType(commander_at, true, sr);
@@ -634,13 +664,13 @@ namespace RiseOfKingdoms.Common
             SetEquipment(commander_at, true, sr);
 
             Console.WriteLine("▶ 수비측 정보 입력.");
-            Console.WriteLine("- 필드/집결 여부를 선택하세요.");
+            Console.WriteLine("- 전투 타입 번호 혹은 이름을 선택하세요.");
             SetIsField(commander_df, sr);
-            Console.WriteLine("- 주사령관 번호를 입력하세요");
+            Console.WriteLine("- 주사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_df, true, false, sr);
-            Console.WriteLine("- 부사령관 번호를 입력하세요");
+            Console.WriteLine("- 부사령관 번호 혹은 이름을 입력하세요");
             SetCommander(commander_df, false, false, sr);
-            Console.WriteLine("- 병종을 선택해 주세요");
+            Console.WriteLine("- 병종 번호 혹은 이름을 선택해 주세요");
             SetTroopType(commander_df, false, sr);
             Console.WriteLine("- 부대수를 입력해 주세요");
             SetTroopAmount(commander_df, sr);

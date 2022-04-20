@@ -14,8 +14,8 @@ Console.WriteLine("■■■■■■■■■■■■■■■■■■■■�
 Console.WriteLine("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■");
 
 #if DEBUG
-SelectInfo.DirectSetting("항넵vs아르테아마니.txt");
-//SelectInfo.IndirectSetting();
+//SelectInfo.DirectSetting("항넵vs아르테아마니.txt");
+SelectInfo.IndirectSetting();
 #else
 SelectInfo.DirectSetting(string.Empty);
 #endif

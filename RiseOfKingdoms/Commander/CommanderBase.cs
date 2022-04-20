@@ -28,7 +28,10 @@ namespace RiseOfKingdoms.Commander
         public double rage = 0;
         // 금수효과
         public int forbiddenTurn = 0;
-
+        // 피의갈증효과
+        public int thirstForBloodTurn = 0;
+        public double thirstForBloodFactor = 0;
+        
         public enum BattleState { Field, Conquering, Garrison }
         public BattleState battleState = BattleState.Field;
 
@@ -62,6 +65,7 @@ namespace RiseOfKingdoms.Commander
         public double normalAttackDamage = 0;
         public double counterAttackDamage = 0;
         public double skillDamage = 0;
+        public double additionalSkillDamage = 0;
         public double heal = 0;
         public bool isSkillUsed = false;
         public double tempAttack = 0;
@@ -142,6 +146,7 @@ namespace RiseOfKingdoms.Commander
             normalAttackDamage = 0;
             counterAttackDamage = 0;
             skillDamage = 0;
+            additionalSkillDamage = 0;
             heal = 0;
             isSkillUsed = false;
             tempAttack = 0;
@@ -161,6 +166,7 @@ namespace RiseOfKingdoms.Commander
             silenceTurn--;
             forbiddenTurn--;
             shieldTurn--;
+            thirstForBloodTurn--;
             if (shieldTurn == 0)
                 shield = 0;
             tempSkillDamageIncreaseCancel = false;
@@ -172,6 +178,10 @@ namespace RiseOfKingdoms.Commander
             shield = 0;
             rage = 0;
             silenceTurn = 0;
+            forbiddenTurn = 0;
+            shieldTurn = 0;
+            thirstForBloodTurn = 0;
+            thirstForBloodFactor = 0;
             activeAttack_bf = 0;
             activeAttack_dbf = 0;
             activeDefence_bf = 0;
